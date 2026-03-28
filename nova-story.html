@@ -1,0 +1,1213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nova's File | Our Fur Life</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Caveat:wght@400;600;700&family=DM+Sans:wght@400;500;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ink: #1a1008;
+            --warm-dark: #2d1f0e;
+            --amber: #c4530a;
+            --amber-light: #e8650f;
+            --cream: #fdf4e3;
+            --warm-white: #fffaf2;
+            --paper: #f5ead0;
+            --gold: #e8a020;
+            --gold-light: #f5c842;
+            --blush: #e8a0a0;
+            --soft-pink: #f5e8e8;
+            --rescue-green: #3a7c4a;
+            --smoke: #7a6a58;
+            --mid: #a08060;
+            --night: #0d1117;
+            --night-blue: #1a2332;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--warm-white);
+            color: var(--ink);
+            overflow-x: hidden;
+        }
+
+        /* Grain texture */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        /* ==================== NAV ==================== */
+        nav {
+            background: var(--ink);
+            border-bottom: 3px solid var(--amber);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--cream);
+            text-decoration: none;
+            font-style: italic;
+        }
+
+        .nav-logo span { color: var(--gold-light); font-style: normal; }
+
+        .nav-back {
+            color: var(--amber-light);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: color 0.2s;
+        }
+        .nav-back:hover { color: var(--gold-light); }
+
+        /* ==================== HERO ==================== */
+        .hero {
+            background: var(--night);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Night sky atmosphere */
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at 30% 40%, rgba(74,100,160,0.15) 0%, transparent 60%),
+                        radial-gradient(ellipse at 70% 60%, rgba(196,83,10,0.08) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .hero-image-container {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+        }
+
+        .hero-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.35;
+            filter: grayscale(20%);
+        }
+
+        /* Security camera overlay effect */
+        .cam-overlay {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            z-index: 10;
+        }
+
+        .cam-dot {
+            width: 10px;
+            height: 10px;
+            background: #ff4444;
+            border-radius: 50%;
+            animation: blink-cam 2s infinite;
+        }
+
+        @keyframes blink-cam {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.2; }
+        }
+
+        .cam-label {
+            font-family: 'DM Sans', monospace;
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.5);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+
+        .cam-timestamp {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-family: 'DM Sans', monospace;
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.4);
+            letter-spacing: 0.1em;
+            z-index: 10;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 5;
+            padding: 4rem 4rem 5rem;
+            background: linear-gradient(transparent, rgba(13,17,23,0.97) 40%);
+        }
+
+        .case-file-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            background: var(--amber);
+            color: var(--cream);
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            padding: 0.4rem 1rem;
+            margin-bottom: 1.5rem;
+            border: 2px solid rgba(255,255,255,0.1);
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3.5rem, 8vw, 7rem);
+            font-weight: 900;
+            color: var(--cream);
+            line-height: 0.92;
+            margin-bottom: 1rem;
+        }
+
+        .hero-title em {
+            font-style: italic;
+            color: var(--gold-light);
+        }
+
+        .hero-subtitle {
+            font-family: 'Caveat', cursive;
+            font-size: 1.6rem;
+            color: var(--blush);
+            font-weight: 600;
+            margin-bottom: 2rem;
+            line-height: 1.4;
+            max-width: 600px;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 2.5rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-stat {
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+        }
+
+        .stat-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--gold-light);
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: rgba(255,255,255,0.4);
+        }
+
+        /* ==================== SCROLL INDICATOR ==================== */
+        .scroll-hint {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            color: rgba(255,255,255,0.3);
+            font-size: 0.7rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            animation: float 3s ease-in-out infinite;
+            z-index: 10;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-6px); }
+        }
+
+        .scroll-arrow {
+            width: 24px;
+            height: 24px;
+            border-right: 2px solid rgba(255,255,255,0.3);
+            border-bottom: 2px solid rgba(255,255,255,0.3);
+            transform: rotate(45deg);
+        }
+
+        /* ==================== PULL QUOTE OPENER ==================== */
+        .opener {
+            background: var(--amber);
+            padding: 5rem 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .opener::before {
+            content: '"';
+            position: absolute;
+            font-family: 'Playfair Display', serif;
+            font-size: 30vw;
+            color: rgba(0,0,0,0.08);
+            top: -5vw;
+            left: -2vw;
+            line-height: 1;
+            pointer-events: none;
+        }
+
+        .opener-quote {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.6rem, 3.5vw, 2.8rem);
+            font-style: italic;
+            color: var(--ink);
+            line-height: 1.45;
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .opener-attr {
+            font-family: 'Caveat', cursive;
+            font-size: 1.2rem;
+            color: rgba(26,16,8,0.6);
+            text-align: center;
+            margin-top: 1.5rem;
+            font-weight: 700;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ==================== STORY SECTIONS ==================== */
+        .story-section {
+            padding: 6rem 0;
+        }
+
+        .story-section.dark {
+            background: var(--ink);
+        }
+
+        .story-section.paper {
+            background: var(--paper);
+        }
+
+        .story-section.cream {
+            background: var(--cream);
+        }
+
+        .story-section.warm {
+            background: var(--warm-white);
+        }
+
+        .story-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 3rem;
+        }
+
+        /* Chapter label */
+        .chapter {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .chapter-line {
+            width: 40px;
+            height: 2px;
+            background: var(--amber);
+        }
+
+        .chapter-text {
+            font-family: 'Caveat', cursive;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--amber);
+            letter-spacing: 0.08em;
+        }
+
+        .chapter.light .chapter-text { color: var(--gold-light); }
+        .chapter.light .chapter-line { background: var(--gold-light); }
+
+        /* Section headings */
+        .story-heading {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.2rem, 4vw, 3.5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 2rem;
+        }
+
+        .story-heading.light { color: var(--cream); }
+        .story-heading.dark-text { color: var(--ink); }
+
+        /* Body text */
+        .story-body {
+            font-size: 1.15rem;
+            line-height: 1.85;
+            color: var(--smoke);
+            max-width: 680px;
+        }
+
+        .story-body.light { color: #8a7060; }
+        .story-body.on-dark { color: rgba(253,244,227,0.65); }
+
+        .story-body p { margin-bottom: 1.5rem; }
+        .story-body p:last-child { margin-bottom: 0; }
+
+        /* Inline handwritten emphasis */
+        .hand {
+            font-family: 'Caveat', cursive;
+            font-size: 1.3em;
+            font-weight: 700;
+            color: var(--amber);
+            display: inline;
+        }
+
+        .hand.gold { color: var(--gold); }
+        .hand.light { color: var(--gold-light); }
+
+        /* ==================== TWO COLUMN LAYOUTS ==================== */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        .two-col.reverse { direction: rtl; }
+        .two-col.reverse > * { direction: ltr; }
+
+        /* ==================== PHOTO FRAMES ==================== */
+        .photo-stack {
+            position: relative;
+        }
+
+        .frame {
+            background: var(--warm-dark);
+            border: 3px solid rgba(255,255,255,0.06);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .frame img {
+            width: 100%;
+            display: block;
+            object-fit: cover;
+        }
+
+        .frame-caption {
+            background: rgba(10,8,4,0.9);
+            padding: 0.7rem 1rem;
+            font-family: 'Caveat', cursive;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--gold-light);
+        }
+
+        .frame-main {
+            transform: rotate(-1.5deg);
+            box-shadow: 12px 12px 0 rgba(0,0,0,0.3);
+            margin-bottom: 1.5rem;
+        }
+
+        .frame-secondary {
+            width: 70%;
+            margin-left: auto;
+            transform: rotate(2deg);
+            box-shadow: 8px 8px 0 rgba(0,0,0,0.25);
+        }
+
+        /* Security cam style frame */
+        .frame-cam {
+            border-color: rgba(255,68,68,0.3);
+            position: relative;
+        }
+
+        .frame-cam::before {
+            content: "⚫ REC";
+            position: absolute;
+            top: 8px;
+            left: 10px;
+            font-size: 0.65rem;
+            color: #ff4444;
+            letter-spacing: 0.1em;
+            font-weight: 800;
+            z-index: 5;
+            font-family: monospace;
+        }
+
+        .frame-cam img {
+            filter: grayscale(40%) contrast(1.1);
+        }
+
+        /* Light frames */
+        .frame-light {
+            border-color: var(--paper);
+            box-shadow: 8px 8px 0 rgba(26,16,8,0.1);
+        }
+
+        .frame-light .frame-caption {
+            background: var(--warm-dark);
+        }
+
+        /* ==================== PULL QUOTE MID-STORY ==================== */
+        .pullquote {
+            border-left: 4px solid var(--amber);
+            padding: 1.5rem 2rem;
+            margin: 3rem 0;
+            background: rgba(196,83,10,0.06);
+        }
+
+        .pullquote p {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-style: italic;
+            line-height: 1.5;
+            color: var(--ink);
+            margin: 0;
+        }
+
+        .pullquote.on-dark {
+            background: rgba(245,200,66,0.06);
+            border-color: var(--gold);
+        }
+
+        .pullquote.on-dark p { color: var(--cream); }
+
+        /* ==================== TIMELINE ==================== */
+        .timeline {
+            position: relative;
+            padding-left: 2.5rem;
+        }
+
+        .timeline::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--amber), var(--gold), var(--rescue-green));
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-bottom: 2.5rem;
+        }
+
+        .timeline-item:last-child { padding-bottom: 0; }
+
+        .timeline-dot {
+            position: absolute;
+            left: -2.9rem;
+            top: 0.3rem;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--amber);
+            border: 3px solid var(--cream);
+            box-shadow: 0 0 0 2px var(--amber);
+        }
+
+        .timeline-dot.gold { background: var(--gold); box-shadow: 0 0 0 2px var(--gold); }
+        .timeline-dot.green { background: var(--rescue-green); box-shadow: 0 0 0 2px var(--rescue-green); }
+
+        .timeline-date {
+            font-family: 'Caveat', cursive;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--amber);
+            margin-bottom: 0.3rem;
+            letter-spacing: 0.05em;
+        }
+
+        .timeline-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--ink);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-body {
+            font-size: 0.95rem;
+            color: var(--smoke);
+            line-height: 1.65;
+        }
+
+        /* ==================== STAT CARDS ==================== */
+        .stat-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 3rem 0;
+        }
+
+        .stat-card {
+            background: var(--warm-white);
+            border: 3px solid var(--paper);
+            padding: 1.8rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .stat-card:nth-child(odd) { transform: rotate(-1deg); }
+        .stat-card:nth-child(even) { transform: rotate(1deg); }
+
+        .stat-card-num {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--amber);
+            line-height: 1;
+            margin-bottom: 0.3rem;
+        }
+
+        .stat-card-label {
+            font-family: 'Caveat', cursive;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--smoke);
+        }
+
+        /* ==================== THE BABIES GRID ==================== */
+        .babies-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .baby-card {
+            background: var(--warm-dark);
+            border: 2px solid rgba(255,255,255,0.06);
+            overflow: hidden;
+            position: relative;
+            transition: border-color 0.3s;
+        }
+
+        .baby-card:hover { border-color: var(--gold); }
+
+        .baby-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            display: block;
+            filter: grayscale(20%);
+            transition: filter 0.3s;
+        }
+
+        .baby-card:hover img { filter: grayscale(0%); }
+
+        .baby-info {
+            padding: 1rem 1.2rem;
+        }
+
+        .baby-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--cream);
+            margin-bottom: 0.2rem;
+        }
+
+        .baby-bio {
+            font-family: 'Caveat', cursive;
+            font-size: 1rem;
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        /* ==================== MISSION CLOSE ==================== */
+        .mission-close {
+            background: var(--rescue-green);
+            padding: 6rem 4rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mission-close::before {
+            content: "SAVE THEM";
+            position: absolute;
+            font-family: 'Playfair Display', serif;
+            font-size: 18vw;
+            color: rgba(255,255,255,0.04);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            white-space: nowrap;
+            pointer-events: none;
+            font-weight: 900;
+        }
+
+        .mission-close h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            color: #e0f0e4;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+            font-style: italic;
+        }
+
+        .mission-close p {
+            font-size: 1.1rem;
+            color: rgba(224,240,228,0.75);
+            max-width: 650px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.75;
+            position: relative;
+            z-index: 1;
+        }
+
+        .mission-btns {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn-cream {
+            display: inline-block;
+            background: var(--cream);
+            color: var(--rescue-green);
+            padding: 1rem 2.2rem;
+            font-weight: 800;
+            text-decoration: none;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            border: 3px solid var(--cream);
+            transition: all 0.25s;
+        }
+
+        .btn-cream:hover {
+            background: transparent;
+            color: var(--cream);
+        }
+
+        .btn-outline-cream {
+            display: inline-block;
+            background: transparent;
+            color: #e0f0e4;
+            padding: 1rem 2.2rem;
+            font-weight: 800;
+            text-decoration: none;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            border: 3px solid rgba(224,240,228,0.4);
+            transition: all 0.25s;
+        }
+
+        .btn-outline-cream:hover {
+            border-color: var(--cream);
+            color: var(--cream);
+        }
+
+        /* ==================== FOOTER NAV ==================== */
+        .page-footer {
+            background: var(--ink);
+            border-top: 3px solid var(--amber);
+            padding: 2.5rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: gap;
+            gap: 1rem;
+        }
+
+        .footer-brand {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-style: italic;
+            color: var(--cream);
+            text-decoration: none;
+        }
+
+        .footer-brand span { color: var(--gold-light); font-style: normal; }
+
+        .footer-nav {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-nav a {
+            color: #5a4030;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: color 0.2s;
+        }
+
+        .footer-nav a:hover { color: var(--amber); }
+
+        /* ==================== DIVIDER ==================== */
+        .section-divider {
+            height: 4px;
+            background: linear-gradient(90deg, var(--amber), var(--gold), var(--amber));
+        }
+
+        /* ==================== FADE IN ANIMATION ==================== */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ==================== RESPONSIVE ==================== */
+        @media (max-width: 900px) {
+            .two-col { grid-template-columns: 1fr; gap: 3rem; }
+            .two-col.reverse { direction: ltr; }
+            .hero-content { padding: 3rem 2rem 4rem; }
+            .opener { padding: 4rem 2rem; }
+            .story-container { padding: 0 1.5rem; }
+            .mission-close { padding: 4rem 2rem; }
+            .page-footer { flex-direction: column; text-align: center; }
+        }
+
+        @media (max-width: 600px) {
+            .babies-grid { grid-template-columns: 1fr; }
+            .stat-cards { grid-template-columns: repeat(2, 1fr); }
+            .hero-stats { gap: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+    <a href="index.html" class="nav-logo">Our <span>Fur</span> Life</a>
+    <a href="index.html#crew" class="nav-back">← Back to The Lineup</a>
+</nav>
+
+<!-- ==================== HERO ==================== -->
+<section class="hero">
+    <div class="hero-image-container">
+        <img src="/api/placeholder/1400/900" alt="Nova — driveway security camera footage, June 2025">
+    </div>
+
+    <div class="cam-overlay">
+        <div class="cam-dot"></div>
+        <span class="cam-label">Ring Camera • Driveway • June 2025</span>
+    </div>
+
+    <div class="cam-timestamp">03:47:22 AM</div>
+
+    <div class="hero-content">
+        <div class="case-file-label">
+            ⚫ Case File — Nova
+        </div>
+        <h1 class="hero-title">
+            Some Moments<br>Aren't Random.<br><em>They're Assignments.</em>
+        </h1>
+        <p class="hero-subtitle">
+            A starving feral mother. Four babies. A grieving house.<br>
+            And a universe that knew exactly what it was doing.
+        </p>
+        <div class="hero-stats">
+            <div class="hero-stat">
+                <span class="stat-value">5 lbs</span>
+                <span class="stat-label">Weight at rescue</span>
+            </div>
+            <div class="hero-stat">
+                <span class="stat-value">~6 mo</span>
+                <span class="stat-label">Age — a baby herself</span>
+            </div>
+            <div class="hero-stat">
+                <span class="stat-value">4</span>
+                <span class="stat-label">Babies she was nursing</span>
+            </div>
+            <div class="hero-stat">
+                <span class="stat-value">2 AM</span>
+                <span class="stat-label">The hour everything changed</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="scroll-hint">
+        <div class="scroll-arrow"></div>
+        Read Her Story
+    </div>
+</section>
+
+<!-- ==================== OPENER QUOTE ==================== -->
+<section class="opener">
+    <p class="opener-quote">
+        "When the universe drops a starving young feral cat at your feet — with four babies — you don't hesitate. You act. Because some moments aren't random. They're assignments."
+    </p>
+    <p class="opener-attr">— Merry, Our Fur Life • June 2025</p>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ==================== CHAPTER 1: THE HOUSE WAS HEAVY ==================== -->
+<section class="story-section dark">
+    <div class="story-container">
+        <div class="two-col">
+            <div class="fade-in">
+                <div class="chapter light">
+                    <div class="chapter-line"></div>
+                    <span class="chapter-text">Chapter One</span>
+                </div>
+                <h2 class="story-heading light">The House<br>Was Heavy.</h2>
+                <div class="story-body on-dark">
+                    <p>June 2025 arrived carrying grief we weren't ready for. Brad's mom — fierce, tough, irreplaceable — had collapsed at home. She was taken to the hospital. She was comatose. And then came the hardest kind of waiting there is.</p>
+                    <p>She held on for almost two weeks. We held on with her. The house filled with the kind of silence that follows deep love and deep loss — the silence that means something enormous is ending and you don't know yet how to live on the other side of it.</p>
+                    <p>We were grieving before we had permission to grieve. And the house felt it.</p>
+                </div>
+                <div class="pullquote on-dark">
+                    <p>"The house was heavy with the kind of silence that follows deep love and deep loss."</p>
+                </div>
+            </div>
+            <div class="fade-in">
+                <div class="frame frame-cam frame-main">
+                    <img src="/api/placeholder/560/420" alt="Nova on the deck — first sighting">
+                    <div class="frame-caption">First sighting. She looked into my soul.</div>
+                </div>
+                <div class="frame frame-cam frame-secondary">
+                    <img src="/api/placeholder/380/280" alt="Nova by the van — skin and bones">
+                    <div class="frame-caption">By the van. Skin and bones. Nursing four babies.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== CHAPTER 2: SHE LOOKED INTO MY SOUL ==================== -->
+<section class="story-section paper">
+    <div class="story-container">
+        <div class="two-col reverse">
+            <div class="fade-in">
+                <div class="chapter">
+                    <div class="chapter-line"></div>
+                    <span class="chapter-text">Chapter Two</span>
+                </div>
+                <h2 class="story-heading dark-text">She Looked Into<br>My Soul.</h2>
+                <div class="story-body">
+                    <p>And then the Ring camera caught her.</p>
+                    <p>A small black cat on the deck. Terrified. Feral. And so, so thin. She was barely six months old — <span class="hand">a baby herself</span> — and she was trying to keep four babies alive with everything she had left in her.</p>
+                    <p>She looked directly into the camera. And I mentally said: <span class="hand">I'm saving you.</span></p>
+                    <p>I didn't know it yet. But she was saving me too.</p>
+                    <p>Operation Rescue was formed. Every Ring camera in the house was activated. I watched her patterns. I learned when she came. I learned which babies followed during daylight — Mack and Diva, the bold ones — and which ones only came at night when they thought the world wasn't watching.</p>
+                </div>
+            </div>
+            <div class="fade-in">
+                <div class="frame frame-light frame-main">
+                    <img src="/api/placeholder/560/500" alt="Nova on deck — first contact">
+                    <div class="frame-caption" style="background:var(--ink);">She looked right at me. I looked right back.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== CHAPTER 3: 2 AM ==================== -->
+<section class="story-section dark">
+    <div class="story-container">
+        <div class="chapter light">
+            <div class="chapter-line"></div>
+            <span class="chapter-text">Chapter Three</span>
+        </div>
+        <h2 class="story-heading light" style="max-width: 700px;">2 AM.<br><em style="color:var(--gold-light)">The Only Shot I'd Get.</em></h2>
+
+        <div class="two-col" style="margin-top: 3rem;">
+            <div class="story-body on-dark fade-in">
+                <p>Astro and Cosmo were different. They were the night kids — they only came when Nova brought them after dark, when a large stray tomcat had been circling the neighborhood and danger was real.</p>
+                <p>I knew something Nova knew too: that was my only window.</p>
+                <p>I cracked the garage just enough. Moved the food as far inside as possible. And I waited.</p>
+                <p>At 2 AM, she brought them all. Every single one.</p>
+                <p>I closed the garage.</p>
+                <p>It scared them. Of course it did. Everything had scared them. But I got all five of them to the basement — and once Nova was in there, I couldn't believe how small she was. <span class="hand light">Five pounds. Nursing four babies. Barely six months old.</span> She had been holding an entire family together on a body that had nothing left to give.</p>
+            </div>
+            <div class="fade-in">
+                <div class="frame frame-cam frame-main">
+                    <img src="/api/placeholder/520/380" alt="Night vision — garage — all five cats">
+                    <div class="frame-caption">Blink camera. 2:17 AM. All five came in.</div>
+                </div>
+                <div class="frame frame-cam frame-secondary">
+                    <img src="/api/placeholder/360/260" alt="Basement — first night safe">
+                    <div class="frame-caption">First night safe. Five exhausted babies.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="stat-cards fade-in" style="margin-top: 4rem;">
+            <div class="stat-card" style="background: var(--warm-dark); border-color: rgba(255,255,255,0.06);">
+                <div class="stat-card-num" style="color: var(--gold-light);">2 AM</div>
+                <div class="stat-card-label" style="color: rgba(255,255,255,0.4);">Hour of rescue</div>
+            </div>
+            <div class="stat-card" style="background: var(--warm-dark); border-color: rgba(255,255,255,0.06);">
+                <div class="stat-card-num" style="color: var(--gold-light);">5 lbs</div>
+                <div class="stat-card-label" style="color: rgba(255,255,255,0.4);">Nova's weight at rescue</div>
+            </div>
+            <div class="stat-card" style="background: var(--warm-dark); border-color: rgba(255,255,255,0.06);">
+                <div class="stat-card-num" style="color: var(--gold-light);">5</div>
+                <div class="stat-card-label" style="color: rgba(255,255,255,0.4);">Lives brought in that night</div>
+            </div>
+            <div class="stat-card" style="background: var(--warm-dark); border-color: rgba(255,255,255,0.06);">
+                <div class="stat-card-num" style="color: var(--rescue-green);">∞</div>
+                <div class="stat-card-label" style="color: rgba(255,255,255,0.4);">What they gave back</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== CHAPTER 4: THE BASEMENT ==================== -->
+<section class="story-section cream">
+    <div class="story-container">
+        <div class="two-col">
+            <div class="fade-in">
+                <div class="chapter">
+                    <div class="chapter-line"></div>
+                    <span class="chapter-text">Chapter Four</span>
+                </div>
+                <h2 class="story-heading dark-text">Every Time We Went<br>Downstairs,<br><em style="color:var(--amber); font-style:italic;">We Smiled.</em></h2>
+                <div class="story-body">
+                    <p>We lost Brad's mom. The house filled back up with that heavy silence. Grief arrived properly this time, and it stayed.</p>
+                    <p>But every time we went to the basement, something happened.</p>
+                    <p>We smiled. <span class="hand">We forgot the pain for a little bit.</span> Five literal babies who needed us — who were becoming less afraid every day, who were learning that hands meant safety and voices meant food and presence meant warmth — they gave us something grief was trying to take away.</p>
+                    <p>They gave us purpose. They gave us routine. They gave us something living to love when our hearts were breaking.</p>
+                    <p>Laughter came back. Slowly. In a basement. Because of five cats who had no idea what they were doing to us.</p>
+                </div>
+                <div class="pullquote">
+                    <p>"We thought we were saving them. But the truth is, they saved us."</p>
+                </div>
+            </div>
+            <div class="fade-in">
+                <div class="frame frame-light frame-main">
+                    <img src="/api/placeholder/560/420" alt="Nova babies on the blanket — safe">
+                    <div class="frame-caption" style="background:var(--ink);">Safe. Warm. The basement that changed everything.</div>
+                </div>
+                <div class="frame frame-light frame-secondary">
+                    <img src="/api/placeholder/380/280" alt="Kittens — Mack and Diva tiny">
+                    <div class="frame-caption" style="background:var(--ink);">Baby Mack & Diva. Before the Popeyes incident.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== THE BABIES ==================== -->
+<section class="story-section dark">
+    <div class="story-container">
+        <div class="chapter light" style="margin-bottom: 2rem;">
+            <div class="chapter-line"></div>
+            <span class="chapter-text">Nova's Four</span>
+        </div>
+        <h2 class="story-heading light" style="margin-bottom: 0.5rem;">The Babies She<br><em style="color:var(--gold-light);">Kept Alive.</em></h2>
+        <p style="color:rgba(253,244,227,0.5); margin-bottom: 3rem; font-size:1rem; font-style:italic;">She brought them to us one night at 2 AM. She trusted us with everything she had.</p>
+
+        <div class="babies-grid fade-in">
+            <div class="baby-card">
+                <img src="/api/placeholder/400/220" alt="Mack">
+                <div class="baby-info">
+                    <div class="baby-name">Mack 🔴</div>
+                    <div class="baby-bio">25% Maine Coon. Red bow tie. Opened the fridge. Zero remorse.</div>
+                </div>
+            </div>
+            <div class="baby-card">
+                <img src="/api/placeholder/400/220" alt="Diva">
+                <div class="baby-info">
+                    <div class="baby-name">Diva 🌸</div>
+                    <div class="baby-bio">Bobtail queen. Pink flower collar. Head of Bugzilla Operations.</div>
+                </div>
+            </div>
+            <div class="baby-card">
+                <img src="/api/placeholder/400/220" alt="Astro">
+                <div class="baby-info">
+                    <div class="baby-name">Astro 💜</div>
+                    <div class="baby-bio">Night kid. Purple bow tie. Perpetually hungry. Prime suspect.</div>
+                </div>
+            </div>
+            <div class="baby-card">
+                <img src="/api/placeholder/400/220" alt="Cosmo">
+                <div class="baby-info">
+                    <div class="baby-name">Cosmo 🟢</div>
+                    <div class="baby-bio">Also a night kid. Green tie. Convinced the house needs his patrol. He's right.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== TIMELINE ==================== -->
+<section class="story-section paper">
+    <div class="story-container">
+        <div class="two-col">
+            <div>
+                <div class="chapter">
+                    <div class="chapter-line"></div>
+                    <span class="chapter-text">The Timeline</span>
+                </div>
+                <h2 class="story-heading dark-text" style="margin-bottom: 3rem;">How Feral<br>Becomes<br><em style="color:var(--amber);">Family.</em></h2>
+
+                <div class="timeline fade-in">
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date">June 2025 — Ring Camera</div>
+                        <div class="timeline-title">First Sighting</div>
+                        <div class="timeline-body">Nova appears on the deck. Skin and bones. Four babies. She looks into the camera. Operation Rescue begins.</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot gold"></div>
+                        <div class="timeline-date">June 2025 — 2 AM</div>
+                        <div class="timeline-title">The Garage</div>
+                        <div class="timeline-body">Nova brings all four babies at once. The garage closes. Five terrified cats make it to the basement.</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date">Next Morning</div>
+                        <div class="timeline-title">The Vet Visit</div>
+                        <div class="timeline-body">Nova weighs 5 pounds. Barely 6 months old. Nursing four babies. The vet is alarmed. We are committed.</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date">Weeks Following</div>
+                        <div class="timeline-title">The Basement Days</div>
+                        <div class="timeline-body">We lose Brad's mom. The house goes heavy. But every trip downstairs brings smiles. Laughter starts coming back.</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot gold"></div>
+                        <div class="timeline-date">Ongoing</div>
+                        <div class="timeline-title">Spay. Neuter. Stay.</div>
+                        <div class="timeline-body">Nova spayed. Diva spayed. The boys neutered. All five stay. The vet asks us not to put the black cats into foster — they're disproportionately overlooked. Brad doesn't need his arm twisted.</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot green"></div>
+                        <div class="timeline-date">Now</div>
+                        <div class="timeline-title">The Sunroom. The Bow Ties. The Chaos.</div>
+                        <div class="timeline-body">Nova still watches from a distance but she's safe and fed and loved. Her babies are absolute menaces in the best possible way. The house is full again.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="fade-in">
+                <div class="frame frame-light frame-main">
+                    <img src="/api/placeholder/540/460" alt="Nova now — pink bow tie, sunroom">
+                    <div class="frame-caption" style="background:var(--ink);">Nova now. Pink bow tie. Sunroom. Still on her terms.</div>
+                </div>
+                <div class="frame frame-light frame-secondary" style="margin-top: 1.5rem;">
+                    <img src="/api/placeholder/380/260" alt="All four at the window — sunroom">
+                    <div class="frame-caption" style="background:var(--ink);">Their favorite place on the planet. Their sunroom.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== NOVA NOW ==================== -->
+<section class="story-section warm">
+    <div class="story-container">
+        <div style="max-width: 750px; margin: 0 auto; text-align: center;" class="fade-in">
+            <div class="chapter" style="justify-content: center;">
+                <div class="chapter-line"></div>
+                <span class="chapter-text">Nova Now</span>
+                <div class="chapter-line"></div>
+            </div>
+            <h2 class="story-heading dark-text" style="text-align: center; margin-bottom: 2rem;">Still On Her Terms.<br><em style="color:var(--amber);">Exactly As It Should Be.</em></h2>
+            <div class="story-body" style="max-width: 100%; text-align: left; margin: 0 auto;">
+                <p>Nova doesn't trust easily. She probably never fully will — and that's okay. She came from a world that gave her every reason not to. The fact that she's here, safe, fed, and loved is the whole story.</p>
+                <p>She has one person. <span class="hand">Brad.</span> Only Brad can change her collar. Only Brad gets the slow blink. She watches me from a careful distance and that's fine — I earned it the night I closed that garage and scared her half to death. I'd do it again tomorrow.</p>
+                <p>She's graduated from rhinestone collar to purple diamond collar — because Brad said so and Nova agreed and the rest of us were not consulted.</p>
+                <p>She is exactly as extra as she should be. She earned every rhinestone.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== MISSION CLOSE ==================== -->
+<section class="mission-close">
+    <h2>Sometimes Rescue<br>Goes Both Ways.</h2>
+    <p>Sometimes the thing you save becomes the reason you survive. We thought we were saving Nova and her babies. They were saving us the whole time. That's why we built this place — and why we spotlight the rescues doing this work every single day for animals and humans alike.</p>
+    <div class="mission-btns">
+        <a href="index.html#rescue" class="btn-cream">See Our Featured Rescues</a>
+        <a href="index.html#crew" class="btn-outline-cream">Meet The Full Crew</a>
+    </div>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+<footer class="page-footer">
+    <a href="index.html" class="footer-brand">Our <span>Fur</span> Life</a>
+    <nav class="footer-nav">
+        <a href="index.html#crew">The Lineup</a>
+        <a href="index.html#cases">Case Files</a>
+        <a href="index.html#tips">Survival Guide</a>
+        <a href="index.html#merch">Merch</a>
+    </nav>
+    <span style="color: #3a2a1a; font-size: 0.8rem; font-weight: 600;">🐾 Real rescue. Real chaos. Real love.</span>
+</footer>
+
+<script>
+    // Fade in on scroll
+    const faders = document.querySelectorAll('.fade-in');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, i) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => {
+                    entry.target.classList.add('visible');
+                }, i * 80);
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.12 });
+
+    faders.forEach(el => observer.observe(el));
+
+    // Immediate visibility for elements already in view
+    window.addEventListener('load', () => {
+        faders.forEach(el => {
+            const rect = el.getBoundingClientRect();
+            if (rect.top < window.innerHeight) {
+                el.classList.add('visible');
+            }
+        });
+    });
+</script>
+</body>
+</html>

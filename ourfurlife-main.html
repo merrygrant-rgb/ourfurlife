@@ -1,0 +1,2192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Fur Life | 9 Bow Ties. Real Rescue. Maximum Chaos.</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Caveat:wght@400;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,800;1,9..40,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ink: #1a1008;
+            --warm-dark: #2d1f0e;
+            --amber: #c4530a;
+            --amber-light: #e8650f;
+            --amber-pale: rgba(196,83,10,0.08);
+            --cream: #fdf4e3;
+            --warm-white: #fffaf2;
+            --paper: #f5ead0;
+            --paper-dark: #ede0c0;
+            --gold: #e8a020;
+            --gold-light: #f5c842;
+            --gold-pale: rgba(232,160,32,0.1);
+            --blush: #c86060;
+            --rescue-green: #3a7c4a;
+            --rescue-pale: rgba(58,124,74,0.1);
+            --sky: #4a7cb8;
+            --smoke: #7a6a58;
+            --mid: #a08060;
+            --light-smoke: #b8a890;
+            --night: #0d1117;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--warm-white);
+            color: var(--ink);
+            overflow-x: hidden;
+        }
+
+        /* Warm grain texture */
+        body::after {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 9998;
+        }
+
+        /* ==================== SCROLLBAR ==================== */
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: var(--paper); }
+        ::-webkit-scrollbar-thumb { background: var(--amber); }
+
+        /* ==================== NAV ==================== */
+        .site-nav {
+            background: var(--ink);
+            border-bottom: 4px solid var(--amber);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-inner {
+            max-width: 1380px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 72px;
+        }
+
+        .nav-brand {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            text-decoration: none;
+        }
+
+        .nav-brand-main {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-style: italic;
+            color: var(--cream);
+            line-height: 1;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .nav-brand-main span { color: var(--gold-light); font-style: normal; }
+
+        .nav-brand-sub {
+            font-family: 'Caveat', cursive;
+            font-size: 0.82rem;
+            color: var(--amber-light);
+            letter-spacing: 0.06em;
+            font-weight: 600;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 0.2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: #c4ad90;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.82rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            padding: 0.5rem 0.9rem;
+            transition: color 0.2s;
+            border-radius: 2px;
+        }
+
+        .nav-links a:hover { color: var(--gold-light); }
+
+        .nav-cta {
+            background: var(--amber) !important;
+            color: var(--cream) !important;
+            font-weight: 800 !important;
+            clip-path: polygon(6% 0, 100% 0, 94% 100%, 0% 100%);
+            padding: 0.6rem 1.4rem !important;
+        }
+
+        .nav-cta:hover { background: var(--gold) !important; color: var(--ink) !important; }
+
+        /* ==================== HERO ==================== */
+        .hero {
+            background: var(--ink);
+            min-height: 95vh;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Warm atmospheric glow */
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 15% 50%, rgba(196,83,10,0.12) 0%, transparent 55%),
+                radial-gradient(ellipse at 85% 30%, rgba(232,160,32,0.06) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 90%, rgba(58,124,74,0.05) 0%, transparent 40%);
+            pointer-events: none;
+        }
+
+        /* Large ghost text */
+        .hero-ghost {
+            position: absolute;
+            font-family: 'Playfair Display', serif;
+            font-size: 22vw;
+            font-weight: 900;
+            font-style: italic;
+            color: transparent;
+            -webkit-text-stroke: 1px rgba(196,83,10,0.1);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -52%);
+            white-space: nowrap;
+            pointer-events: none;
+            animation: ghost-drift 18s ease-in-out infinite alternate;
+            z-index: 0;
+        }
+
+        @keyframes ghost-drift {
+            from { transform: translate(-50%, -52%) rotate(-1deg); }
+            to { transform: translate(-48%, -50%) rotate(1deg); }
+        }
+
+        .hero-inner {
+            max-width: 1380px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            gap: 5rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+            width: 100%;
+        }
+
+        /* Hero text */
+        .hero-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .eyebrow-line {
+            width: 36px;
+            height: 2px;
+            background: var(--amber);
+        }
+
+        .eyebrow-text {
+            font-family: 'Caveat', cursive;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--amber-light);
+            letter-spacing: 0.08em;
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3.2rem, 7vw, 6.5rem);
+            font-weight: 900;
+            color: var(--cream);
+            line-height: 0.93;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-title em {
+            font-style: italic;
+            color: var(--gold-light);
+            display: block;
+        }
+
+        .hero-title .small-line {
+            font-size: 0.55em;
+            font-style: normal;
+            color: var(--blush);
+            display: block;
+            font-family: 'Caveat', cursive;
+            font-weight: 600;
+            margin-top: 0.3rem;
+            letter-spacing: 0.05em;
+        }
+
+        .hero-deck {
+            font-size: 1.15rem;
+            color: #a09080;
+            line-height: 1.7;
+            max-width: 500px;
+            margin-bottom: 2rem;
+            border-left: 3px solid var(--amber);
+            padding-left: 1.2rem;
+        }
+
+        .hero-deck strong { color: var(--cream); font-weight: 600; }
+
+        .hero-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .htag {
+            font-family: 'Caveat', cursive;
+            font-size: 1.05rem;
+            font-weight: 700;
+            padding: 0.35rem 0.9rem;
+            border: 2px solid;
+            border-radius: 2px;
+        }
+
+        .htag-a { border-color: var(--amber); color: var(--amber-light); background: rgba(196,83,10,0.1); }
+        .htag-b { border-color: var(--sky); color: #8ab4e8; background: rgba(74,124,184,0.1); }
+        .htag-c { border-color: var(--gold); color: var(--gold-light); background: rgba(232,160,32,0.1); }
+        .htag-d { border-color: var(--rescue-green); color: #80c090; background: rgba(58,124,74,0.1); }
+
+        .hero-ctas {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            background: var(--amber);
+            color: var(--cream);
+            padding: 1rem 2.2rem;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            clip-path: polygon(0 0, 100% 0, 94% 100%, 6% 100%);
+            transition: all 0.25s;
+            border: none;
+            cursor: pointer;
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        .btn-primary:hover { background: var(--gold); color: var(--ink); }
+
+        .btn-outline {
+            display: inline-block;
+            background: transparent;
+            color: var(--cream);
+            padding: 1rem 2rem;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            border: 2px solid rgba(255,255,255,0.2);
+            transition: all 0.25s;
+        }
+
+        .btn-outline:hover { border-color: var(--gold-light); color: var(--gold-light); }
+
+        /* Hero photo collage */
+        .hero-collage {
+            position: relative;
+            height: 540px;
+        }
+
+        .hc-frame {
+            position: absolute;
+            overflow: hidden;
+            border: 4px solid rgba(255,255,255,0.07);
+            transition: all 0.35s;
+            cursor: pointer;
+        }
+
+        .hc-frame:hover {
+            z-index: 20;
+            border-color: var(--amber);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 30px rgba(196,83,10,0.2);
+            transform: rotate(0deg) scale(1.04) !important;
+        }
+
+        .hc-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .hc-cap {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            background: rgba(10,8,4,0.82);
+            padding: 0.5rem 0.8rem;
+            font-family: 'Caveat', cursive;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--gold-light);
+        }
+
+        .hc-1 { width: 300px; height: 280px; top: 0; left: 10px; transform: rotate(-2.5deg); box-shadow: 10px 10px 0 rgba(0,0,0,0.4); z-index: 3; }
+        .hc-2 { width: 240px; height: 220px; top: 20px; right: 10px; transform: rotate(3deg); box-shadow: 8px 8px 0 rgba(0,0,0,0.4); z-index: 2; }
+        .hc-3 { width: 260px; height: 240px; bottom: 30px; left: 40px; transform: rotate(1.5deg); box-shadow: 8px 8px 0 rgba(0,0,0,0.4); z-index: 4; }
+        .hc-4 { width: 200px; height: 180px; bottom: 10px; right: 20px; transform: rotate(-2deg); box-shadow: 6px 6px 0 rgba(0,0,0,0.4); z-index: 5; }
+
+        .hc-sticky {
+            position: absolute;
+            background: var(--gold-light);
+            color: var(--ink);
+            font-family: 'Caveat', cursive;
+            font-size: 1rem;
+            font-weight: 700;
+            padding: 0.8rem 1rem;
+            line-height: 1.3;
+            box-shadow: 3px 5px 10px rgba(0,0,0,0.3);
+            max-width: 140px;
+            z-index: 15;
+            transform: rotate(4deg);
+            top: 260px;
+            right: 0px;
+        }
+
+        /* ==================== WARM TICKER ==================== */
+        .warm-ticker {
+            background: var(--amber);
+            border-top: 3px solid var(--gold);
+            border-bottom: 3px solid var(--gold);
+            padding: 0.65rem 0;
+            overflow: hidden;
+        }
+
+        .ticker-track {
+            display: flex;
+            animation: ticker-roll 32s linear infinite;
+            white-space: nowrap;
+        }
+
+        .ticker-track:hover { animation-play-state: paused; }
+
+        .t-item {
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            font-style: italic;
+            color: var(--ink);
+            padding: 0 2rem;
+        }
+
+        .t-dot { color: rgba(26,16,8,0.35); font-style: normal; }
+
+        @keyframes ticker-roll {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+        }
+
+        /* ==================== SHARED SECTION STYLES ==================== */
+        .section { padding: 6rem 0; }
+        .section-cream { background: var(--cream); }
+        .section-paper { background: var(--paper); }
+        .section-warm { background: var(--warm-white); }
+        .section-dark { background: var(--ink); }
+
+        .wrap {
+            max-width: 1380px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-eyebrow {
+            font-family: 'Caveat', cursive;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--amber);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            display: block;
+            margin-bottom: 0.4rem;
+        }
+
+        .section-eyebrow.light { color: var(--gold-light); }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 4.5vw, 4rem);
+            font-weight: 900;
+            line-height: 0.95;
+            margin-bottom: 1rem;
+        }
+
+        .section-title.light { color: var(--cream); }
+        .section-title em { font-style: italic; color: var(--amber); }
+        .section-title.light em { color: var(--gold-light); }
+
+        .section-sub {
+            font-size: 1.05rem;
+            color: var(--smoke);
+            max-width: 540px;
+            line-height: 1.65;
+        }
+
+        .section-sub.light { color: #8a7060; }
+
+        .section-header { margin-bottom: 3.5rem; }
+
+        .view-all {
+            display: inline-block;
+            margin-top: 2.5rem;
+            color: var(--amber);
+            font-weight: 800;
+            text-decoration: none;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            border-bottom: 2px solid var(--amber);
+            padding-bottom: 0.15rem;
+            transition: all 0.2s;
+        }
+
+        .view-all:hover { color: var(--amber-light); border-color: var(--amber-light); }
+        .view-all.light { color: var(--gold); border-color: var(--gold); }
+        .view-all.light:hover { color: var(--gold-light); border-color: var(--gold-light); }
+
+        .center { text-align: center; }
+
+        /* Divider */
+        .warm-divider {
+            height: 4px;
+            background: linear-gradient(90deg, var(--paper), var(--amber), var(--gold), var(--amber), var(--paper));
+        }
+
+        /* ==================== CREW SECTION ==================== */
+        .crew-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .crew-card {
+            background: var(--warm-white);
+            border: 3px solid var(--paper-dark);
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .crew-card:nth-child(3n+1) { transform: rotate(-1.2deg); }
+        .crew-card:nth-child(3n+2) { transform: rotate(0.8deg); }
+        .crew-card:nth-child(3n)   { transform: rotate(-0.4deg); }
+
+        .crew-card:hover {
+            transform: rotate(0deg) scale(1.04) translateY(-5px) !important;
+            border-color: var(--amber);
+            z-index: 10;
+            box-shadow: 0 16px 40px rgba(26,16,8,0.15);
+        }
+
+        .crew-photo {
+            height: 210px;
+            background: var(--paper);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .crew-photo img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s;
+        }
+
+        .crew-card:hover .crew-photo img { transform: scale(1.06); }
+
+        .crew-bow {
+            position: absolute;
+            top: 10px; left: 10px;
+            width: 34px; height: 34px;
+            border-radius: 50%;
+            border: 3px solid rgba(26,16,8,0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            box-shadow: 2px 2px 0 rgba(26,16,8,0.4);
+        }
+
+        /* Bail bond ribbon */
+        .bail-ribbon {
+            position: absolute;
+            top: 14px;
+            right: -28px;
+            background: var(--amber);
+            color: var(--cream);
+            font-family: 'Caveat', cursive;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.3rem 2.5rem;
+            transform: rotate(45deg);
+            letter-spacing: 0.08em;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        }
+
+        .bail-ribbon.green {
+            background: var(--rescue-green);
+        }
+
+        .crew-info {
+            padding: 1.1rem 1.2rem 1.3rem;
+        }
+
+        .crew-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.7rem;
+            font-weight: 900;
+            line-height: 1;
+            margin-bottom: 0.25rem;
+            color: var(--ink);
+        }
+
+        .crew-handle {
+            font-family: 'Caveat', cursive;
+            font-size: 1rem;
+            color: var(--amber);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .crew-bio {
+            font-size: 0.85rem;
+            color: var(--smoke);
+            line-height: 1.55;
+        }
+
+        .crew-status {
+            display: inline-block;
+            margin-top: 0.6rem;
+            padding: 0.2rem 0.7rem;
+            font-size: 0.7rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            border-radius: 2px;
+        }
+
+        .status-home { background: #d4edda; color: var(--rescue-green); }
+        .status-progress { background: #fff3cd; color: #856404; }
+
+        /* ==================== NOVA FEATURE ==================== */
+        .nova-feature {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        .nova-photos {
+            position: relative;
+            height: 480px;
+        }
+
+        .nova-frame {
+            position: absolute;
+            overflow: hidden;
+            border: 4px solid rgba(255,255,255,0.07);
+        }
+
+        .nova-frame img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .nf-cap {
+            background: rgba(10,8,4,0.88);
+            padding: 0.5rem 0.8rem;
+            font-family: 'Caveat', cursive;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--gold-light);
+        }
+
+        .nova-frame-a {
+            width: 68%; top: 0; left: 0;
+            transform: rotate(-2deg);
+            box-shadow: 10px 10px 0 rgba(0,0,0,0.5);
+            z-index: 2;
+        }
+
+        .nova-frame-a img { height: 280px; }
+
+        .nova-frame-b {
+            width: 55%; bottom: 20px; right: 0;
+            transform: rotate(3deg);
+            border-color: var(--amber);
+            box-shadow: 8px 8px 0 rgba(0,0,0,0.4);
+            z-index: 3;
+        }
+
+        .nova-frame-b img { height: 220px; }
+
+        .cam-badge {
+            position: absolute;
+            top: 10px; left: 10px;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            z-index: 10;
+        }
+
+        .cam-dot {
+            width: 8px; height: 8px;
+            background: #ff4444;
+            border-radius: 50%;
+            animation: cam-blink 2s infinite;
+        }
+
+        @keyframes cam-blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.2; }
+        }
+
+        .cam-text {
+            font-family: monospace;
+            font-size: 0.65rem;
+            color: rgba(255,255,255,0.5);
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        .nova-story h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.2rem, 4vw, 3.5rem);
+            font-weight: 900;
+            line-height: 1;
+            color: var(--cream);
+            margin-bottom: 0.5rem;
+        }
+
+        .nova-story h2 em {
+            font-style: italic;
+            color: var(--gold-light);
+        }
+
+        .nova-byline {
+            font-family: 'Caveat', cursive;
+            font-size: 1.2rem;
+            color: var(--gold);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .nova-story p {
+            font-size: 1.05rem;
+            color: #8a7060;
+            line-height: 1.75;
+            margin-bottom: 1.2rem;
+        }
+
+        .nova-pullquote {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-style: italic;
+            color: var(--cream);
+            line-height: 1.5;
+            padding: 1.2rem 1.5rem;
+            border-left: 4px solid var(--amber);
+            background: rgba(196,83,10,0.08);
+            margin: 1.5rem 0;
+        }
+
+        /* ==================== DIARIES / CASE FILES ==================== */
+        .diaries-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+            gap: 2rem;
+        }
+
+        .diary-card {
+            background: var(--warm-white);
+            border: 3px solid var(--paper-dark);
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s;
+            overflow: hidden;
+        }
+
+        .diary-card:hover {
+            border-color: var(--amber);
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(26,16,8,0.1);
+        }
+
+        .diary-img {
+            height: 195px;
+            background: var(--paper);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .diary-img img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s;
+        }
+
+        .diary-card:hover .diary-img img { transform: scale(1.05); }
+
+        /* Diagonal ribbon tag */
+        .diary-tag {
+            position: absolute;
+            top: 14px; left: -5px;
+            font-family: 'Caveat', cursive;
+            font-size: 0.85rem;
+            font-weight: 700;
+            padding: 0.35rem 1.1rem 0.35rem 0.9rem;
+            border: 2px solid var(--ink);
+            box-shadow: 2px 2px 0 var(--ink);
+            transform: rotate(-1.5deg);
+            letter-spacing: 0.04em;
+        }
+
+        .dt-chaos  { background: var(--amber); color: var(--cream); }
+        .dt-rescue { background: var(--rescue-green); color: #e0f0e4; }
+        .dt-snack  { background: var(--gold); color: var(--ink); }
+        .dt-bug    { background: var(--blush); color: var(--cream); }
+        .dt-night  { background: #2d3a5a; color: #a0b4d4; }
+
+        .diary-body { padding: 1.2rem 1.3rem 1.4rem; }
+
+        .diary-case {
+            font-family: 'Caveat', cursive;
+            font-size: 0.88rem;
+            color: var(--mid);
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .diary-body h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            line-height: 1.2;
+            margin-bottom: 0.5rem;
+            color: var(--ink);
+        }
+
+        .diary-reporter {
+            font-family: 'Caveat', cursive;
+            font-size: 0.95rem;
+            color: var(--amber);
+            font-weight: 700;
+        }
+
+        /* ==================== BAIL BOND SECTION ==================== */
+        .bail-section {
+            background: var(--ink);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bail-section::before {
+            content: "BAIL BOND";
+            position: absolute;
+            font-family: 'Playfair Display', serif;
+            font-size: 18vw;
+            font-weight: 900;
+            color: transparent;
+            -webkit-text-stroke: 1px rgba(196,83,10,0.07);
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            white-space: nowrap;
+            pointer-events: none;
+        }
+
+        .bail-inner {
+            position: relative;
+            z-index: 1;
+        }
+
+        .bail-header {
+            text-align: center;
+            margin-bottom: 3.5rem;
+        }
+
+        .bail-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .bail-card {
+            background: var(--warm-dark);
+            border: 3px solid rgba(255,255,255,0.06);
+            padding: 1.8rem;
+            position: relative;
+            transition: border-color 0.3s;
+        }
+
+        .bail-card:hover { border-color: var(--amber); }
+
+        .bail-card.active {
+            border-color: var(--amber);
+            animation: bail-pulse 3s ease-in-out infinite;
+        }
+
+        .bail-card.closed { border-color: var(--rescue-green); }
+
+        @keyframes bail-pulse {
+            0%, 100% { border-color: var(--amber); }
+            50% { border-color: var(--gold); }
+        }
+
+        .bail-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px dashed rgba(255,255,255,0.1);
+        }
+
+        .bail-num {
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            font-style: italic;
+            color: var(--amber);
+        }
+
+        .bail-status {
+            font-family: 'Caveat', cursive;
+            font-size: 0.85rem;
+            font-weight: 700;
+            padding: 0.25rem 0.8rem;
+            clip-path: polygon(8% 0, 100% 0, 92% 100%, 0% 100%);
+        }
+
+        .bs-open { background: var(--amber); color: var(--cream); animation: blink-s 2.5s infinite; }
+        .bs-closed { background: var(--rescue-green); color: #e0f0e4; }
+        .bs-bugzilla { background: var(--blush); color: var(--cream); }
+
+        @keyframes blink-s {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.65; }
+        }
+
+        .bail-card h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            color: var(--cream);
+            margin-bottom: 0.3rem;
+        }
+
+        .bail-perp {
+            font-family: 'Caveat', cursive;
+            font-size: 1rem;
+            color: var(--gold);
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+        }
+
+        .bail-details {
+            font-size: 0.88rem;
+            color: #7a6a58;
+            line-height: 1.6;
+        }
+
+        .bail-note {
+            font-family: 'Caveat', cursive;
+            color: var(--amber-light);
+            font-size: 0.95rem;
+            font-weight: 700;
+        }
+
+        .bail-btn {
+            display: inline-block;
+            margin-top: 1.2rem;
+            background: transparent;
+            color: var(--amber-light);
+            border: 2px solid var(--amber);
+            padding: 0.5rem 1.2rem;
+            font-family: 'Caveat', cursive;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .bail-btn:hover { background: var(--amber); color: var(--cream); }
+
+        /* ==================== SURVIVAL GUIDE ==================== */
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .tip-card {
+            background: var(--cream);
+            border: 3px solid var(--paper-dark);
+            padding: 1.8rem;
+            position: relative;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .tip-card:nth-child(odd)  { transform: rotate(-0.7deg); }
+        .tip-card:nth-child(even) { transform: rotate(0.7deg); }
+
+        .tip-card:hover {
+            transform: rotate(0) !important;
+            border-color: var(--amber);
+            box-shadow: 0 8px 24px rgba(26,16,8,0.1);
+            z-index: 5;
+        }
+
+        .tip-num {
+            position: absolute;
+            top: -12px; right: 16px;
+            background: var(--gold);
+            color: var(--ink);
+            width: 34px; height: 34px;
+            display: flex; align-items: center; justify-content: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            font-weight: 900;
+            transform: rotate(5deg);
+            border: 2px solid var(--ink);
+        }
+
+        .tip-cat {
+            font-family: 'Caveat', cursive;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--amber);
+            margin-bottom: 0.3rem;
+        }
+
+        .tip-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            line-height: 1.2;
+            margin-bottom: 0.7rem;
+            color: var(--ink);
+        }
+
+        .tip-card p {
+            font-size: 0.88rem;
+            color: var(--smoke);
+            line-height: 1.6;
+        }
+
+        .tip-hand {
+            font-family: 'Caveat', cursive;
+            color: var(--amber);
+            font-size: 1.05rem;
+            font-weight: 700;
+        }
+
+        /* ==================== RESCUE SECTION ==================== */
+        .rescue-feature {
+            background: var(--cream);
+            border: 3px solid var(--paper-dark);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3.5rem;
+            padding: 3rem;
+            position: relative;
+            margin-bottom: 3rem;
+            box-shadow: 6px 6px 0 rgba(26,16,8,0.06);
+        }
+
+        .rescue-feature::before {
+            content: "FEATURED ALLY";
+            position: absolute;
+            top: -14px; left: 24px;
+            background: var(--rescue-green);
+            color: #e0f0e4;
+            font-family: 'Caveat', cursive;
+            font-size: 0.9rem;
+            font-weight: 700;
+            padding: 0.25rem 1rem;
+            border: 2px solid var(--ink);
+            letter-spacing: 0.1em;
+        }
+
+        .rescue-img {
+            overflow: hidden;
+            border: 3px solid var(--paper-dark);
+            transform: rotate(-1.2deg);
+            box-shadow: 8px 8px 0 rgba(26,16,8,0.08);
+        }
+
+        .rescue-img img {
+            width: 100%; height: 300px;
+            object-fit: cover; display: block;
+        }
+
+        .rescue-content h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 900;
+            margin-bottom: 0.3rem;
+            color: var(--ink);
+        }
+
+        .rescue-loc {
+            font-family: 'Caveat', cursive;
+            font-size: 1.05rem;
+            color: var(--amber);
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .rescue-content p {
+            font-size: 0.95rem;
+            color: var(--smoke);
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+
+        .rescue-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+        .btn-green {
+            display: inline-block;
+            background: var(--rescue-green);
+            color: #e0f0e4;
+            padding: 0.85rem 1.8rem;
+            font-weight: 800;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            border: 2px solid var(--ink);
+            transition: background 0.2s;
+        }
+
+        .btn-green:hover { background: #4a9a5e; }
+
+        .rescue-submit {
+            background: var(--amber);
+            border: 3px solid var(--ink);
+            padding: 2.5rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            box-shadow: 6px 6px 0 rgba(26,16,8,0.12);
+        }
+
+        .rescue-submit h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-style: italic;
+            color: var(--ink);
+            margin-bottom: 0.3rem;
+        }
+
+        .rescue-submit p {
+            font-size: 0.95rem;
+            color: rgba(26,16,8,0.7);
+            max-width: 480px;
+        }
+
+        /* ==================== MERCH ==================== */
+        .merch-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .merch-card {
+            background: var(--warm-white);
+            border: 3px solid var(--paper-dark);
+            padding: 1.5rem;
+            text-align: center;
+            position: relative;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .merch-card:nth-child(odd)  { transform: rotate(-0.8deg); }
+        .merch-card:nth-child(even) { transform: rotate(0.8deg); }
+
+        .merch-card:hover {
+            transform: rotate(0) scale(1.04) !important;
+            border-color: var(--amber);
+            z-index: 5;
+            box-shadow: 0 10px 28px rgba(26,16,8,0.1);
+        }
+
+        .merch-mock {
+            height: 210px;
+            background: var(--paper);
+            border: 2px dashed var(--paper-dark);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .merch-mock-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-style: italic;
+            color: var(--amber);
+            opacity: 0.35;
+            text-align: center;
+            padding: 0.5rem;
+        }
+
+        .merch-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            margin-bottom: 0.25rem;
+            color: var(--ink);
+        }
+
+        .merch-desc {
+            font-family: 'Caveat', cursive;
+            font-size: 0.95rem;
+            color: var(--smoke);
+            margin-bottom: 0.8rem;
+        }
+
+        .merch-price {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--amber);
+            margin-bottom: 1rem;
+        }
+
+        /* ==================== NEWSLETTER ==================== */
+        .newsletter {
+            background: var(--amber);
+            position: relative;
+            overflow: hidden;
+            padding: 5.5rem 0;
+        }
+
+        .newsletter::before {
+            content: "Come on in";
+            position: absolute;
+            font-family: 'Playfair Display', serif;
+            font-size: 13vw;
+            font-style: italic;
+            font-weight: 900;
+            color: rgba(0,0,0,0.07);
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            white-space: nowrap;
+            pointer-events: none;
+        }
+
+        .nl-inner {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .nl-inner h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-style: italic;
+            font-weight: 900;
+            color: var(--ink);
+            margin-bottom: 0.5rem;
+        }
+
+        .nl-inner > p {
+            font-size: 1.1rem;
+            color: rgba(26,16,8,0.65);
+            font-weight: 600;
+            margin-bottom: 2.5rem;
+        }
+
+        .nl-form {
+            max-width: 540px;
+            margin: 0 auto 2rem;
+            display: flex;
+            box-shadow: 6px 6px 0 rgba(0,0,0,0.15);
+        }
+
+        .nl-form input {
+            flex: 1;
+            padding: 1.1rem 1.5rem;
+            border: 4px solid var(--ink);
+            border-right: none;
+            font-size: 1rem;
+            font-family: 'DM Sans', sans-serif;
+            background: var(--warm-white);
+            color: var(--ink);
+        }
+
+        .nl-form input:focus { outline: none; }
+        .nl-form input::placeholder { color: var(--mid); }
+
+        .nl-form button {
+            background: var(--ink);
+            color: var(--gold-light);
+            border: 4px solid var(--ink);
+            padding: 1.1rem 1.8rem;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            font-style: italic;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.25s;
+        }
+
+        .nl-form button:hover { background: var(--warm-dark); }
+
+        .nl-perks {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            font-family: 'Caveat', cursive;
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: rgba(26,16,8,0.7);
+        }
+
+        /* ==================== FOOTER ==================== */
+        .site-footer {
+            background: var(--ink);
+            border-top: 4px solid var(--amber);
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-brand h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-style: italic;
+            color: var(--cream);
+            margin-bottom: 0.2rem;
+        }
+
+        .footer-brand h2 span { color: var(--gold-light); font-style: normal; }
+
+        .footer-brand .sub {
+            font-family: 'Caveat', cursive;
+            font-size: 0.95rem;
+            color: var(--amber-light);
+            margin-bottom: 1rem;
+        }
+
+        .footer-brand p {
+            font-size: 0.88rem;
+            color: #5a4030;
+            line-height: 1.65;
+            font-family: 'Caveat', cursive;
+            font-size: 1rem;
+        }
+
+        .footer-col h5 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            color: var(--amber);
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+
+        .footer-col a {
+            display: block;
+            color: #5a4030;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            transition: color 0.2s;
+        }
+
+        .footer-col a:hover { color: var(--cream); }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding-top: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-copy { color: #3a2a1a; font-size: 0.82rem; font-weight: 600; }
+        .footer-copy em { color: var(--amber); font-style: normal; }
+
+        /* ==================== MODAL ==================== */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(10,8,4,0.88);
+            z-index: 10000;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(6px);
+        }
+
+        .modal-overlay.active { display: flex; }
+
+        .modal {
+            background: var(--warm-white);
+            border: 4px solid var(--amber);
+            max-width: 660px;
+            width: 92%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 16px 16px 0 rgba(0,0,0,0.3);
+        }
+
+        .modal-head {
+            background: var(--amber);
+            color: var(--cream);
+            padding: 1.2rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-head h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-style: italic;
+        }
+
+        .modal-close {
+            background: none; border: none;
+            font-size: 2rem; cursor: pointer;
+            color: var(--cream); line-height: 1;
+        }
+
+        .modal-body { padding: 2rem; }
+
+        .form-group { margin-bottom: 1.2rem; }
+
+        .form-group label {
+            display: block;
+            font-weight: 800;
+            font-size: 0.82rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.4rem;
+            color: var(--ink);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.9rem;
+            border: 3px solid var(--paper-dark);
+            background: var(--cream);
+            color: var(--ink);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.95rem;
+            transition: border-color 0.2s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--amber);
+        }
+
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+        /* ==================== FADE IN ==================== */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.65s ease, transform 0.65s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ==================== RESPONSIVE ==================== */
+        @media (max-width: 1100px) {
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+
+        @media (max-width: 900px) {
+            .hero-inner,
+            .nova-feature,
+            .rescue-feature { grid-template-columns: 1fr; gap: 2.5rem; }
+            .hero-collage { height: 320px; }
+            .hc-1 { width: 220px; height: 200px; }
+            .hc-2 { width: 180px; height: 160px; }
+            .hc-3 { width: 190px; height: 170px; }
+            .hc-4 { width: 150px; height: 140px; }
+            .nova-photos { height: 340px; }
+            .nova-frame-a { width: 65%; }
+            .nova-frame-a img { height: 220px; }
+            .nova-frame-b { width: 55%; }
+            .nova-frame-b img { height: 180px; }
+            .rescue-submit { flex-direction: column; }
+        }
+
+        @media (max-width: 640px) {
+            .nav-inner { height: auto; padding: 0.8rem 1.5rem; flex-direction: column; gap: 0.8rem; }
+            .nav-links { flex-wrap: wrap; justify-content: center; gap: 0.2rem; }
+            .nl-form { flex-direction: column; }
+            .nl-form input, .nl-form button { width: 100%; border-right: 4px solid var(--ink); }
+            .footer-grid { grid-template-columns: 1fr; }
+            .form-row { grid-template-columns: 1fr; }
+            .footer-bottom { flex-direction: column; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ==================== NAV ==================== -->
+<header class="site-nav">
+    <div class="nav-inner">
+        <a href="#" class="nav-brand">
+            <span class="nav-brand-main">Our <span>Fur</span> Life</span>
+            <span class="nav-brand-sub">9 Bow Ties. Real Rescue. Maximum Chaos.</span>
+        </a>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="#crew">The Lineup</a></li>
+                <li><a href="#diaries">Diaries</a></li>
+                <li><a href="#nova">Nova's Story</a></li>
+                <li><a href="#tips">Survival Guide</a></li>
+                <li><a href="#merch">Merch</a></li>
+                <li><a href="#newsletter" class="nav-cta">Come On In</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<!-- ==================== HERO ==================== -->
+<section class="hero">
+    <div class="hero-ghost">Fur Life</div>
+    <div class="hero-inner">
+        <div class="hero-text fade-in">
+            <div class="hero-eyebrow">
+                <div class="eyebrow-line"></div>
+                <span class="eyebrow-text">Real rescue. Real chaos. Real love.</span>
+            </div>
+            <h1 class="hero-title">
+                Welcome to<br>
+                <em>the chaos.</em>
+                <span class="small-line">Pull up a chair. Watch your Popeyes.</span>
+            </h1>
+            <p class="hero-deck">Nine rescued souls. Nine bow ties. One house that went from <strong>grief-heavy silence</strong> to absolute, joyful, magnificent bedlam. This is what happens when the universe sends you five cats at 2 AM and you say yes anyway.</p>
+            <div class="hero-tags">
+                <span class="htag htag-a">9 Rescues</span>
+                <span class="htag htag-b">Feral → Formal</span>
+                <span class="htag htag-c">∞ Chaos</span>
+                <span class="htag htag-d">Real Advocacy</span>
+            </div>
+            <div class="hero-ctas">
+                <a href="#nova" class="btn-primary">Read Nova's Story</a>
+                <a href="#crew" class="btn-outline">Meet The Crew</a>
+            </div>
+        </div>
+
+        <div class="hero-collage fade-in">
+            <div class="hc-frame hc-1">
+                <img src="/api/placeholder/300/280" alt="Diva - pink flower collar sunroom">
+                <div class="hc-cap">Diva. She knows exactly what she's doing.</div>
+            </div>
+            <div class="hc-frame hc-2">
+                <img src="/api/placeholder/240/220" alt="Dallas - blue bow tie">
+                <div class="hc-cap">Dallas. The biggest win.</div>
+            </div>
+            <div class="hc-frame hc-3">
+                <img src="/api/placeholder/260/240" alt="Cats watching chipmunk TV">
+                <div class="hc-cap">Active investigation. Chipmunk at large.</div>
+            </div>
+            <div class="hc-frame hc-4">
+                <img src="/api/placeholder/200/180" alt="Mack red bow tie">
+                <div class="hc-cap">Mack. Innocent. (He's not.)</div>
+            </div>
+            <div class="hc-sticky">🍗<br>"That was MY<br>Popeyes, Mack."</div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== WARM TICKER ==================== -->
+<div class="warm-ticker">
+    <div class="ticker-track">
+        <span class="t-item">🎀 Dallas: feral → bow tie enthusiast <span class="t-dot">•</span></span>
+        <span class="t-item">🍗 Mack opened the fridge. Ate the Popeyes. Zero remorse <span class="t-dot">•</span></span>
+        <span class="t-item">🐿️ Chipmunk investigation: still ongoing <span class="t-dot">•</span></span>
+        <span class="t-item">💎 Nova update: Brad changed her collar. I am still not allowed within four feet <span class="t-dot">•</span></span>
+        <span class="t-item">🪲 Bugzilla Unit deployed — Diva on the case <span class="t-dot">•</span></span>
+        <span class="t-item">🎀 Mack DNA results: 25% Maine Coon. We are not prepared <span class="t-dot">•</span></span>
+        <span class="t-item">😴 Cosmo's 3 AM patrol: confirmed necessary (his words) <span class="t-dot">•</span></span>
+        <span class="t-item">🐾 Astro denied everything. Again. <span class="t-dot">•</span></span>
+        <span class="t-item">🎀 Dallas: feral → bow tie enthusiast <span class="t-dot">•</span></span>
+        <span class="t-item">🍗 Mack opened the fridge. Ate the Popeyes. Zero remorse <span class="t-dot">•</span></span>
+        <span class="t-item">🐿️ Chipmunk investigation: still ongoing <span class="t-dot">•</span></span>
+        <span class="t-item">💎 Nova update: Brad changed her collar. I am still not allowed within four feet <span class="t-dot">•</span></span>
+        <span class="t-item">🪲 Bugzilla Unit deployed — Diva on the case <span class="t-dot">•</span></span>
+        <span class="t-item">🎀 Mack DNA results: 25% Maine Coon. We are not prepared <span class="t-dot">•</span></span>
+        <span class="t-item">😴 Cosmo's 3 AM patrol: confirmed necessary (his words) <span class="t-dot">•</span></span>
+        <span class="t-item">🐾 Astro denied everything. Again. <span class="t-dot">•</span></span>
+    </div>
+</div>
+
+<div class="warm-divider"></div>
+
+<!-- ==================== CREW ==================== -->
+<section class="section section-cream" id="crew">
+    <div class="wrap">
+        <div class="section-header fade-in">
+            <span class="section-eyebrow">The Suspects</span>
+            <h2 class="section-title">The Lineup</h2>
+            <p class="section-sub">Nine perpetrators. Nine personalities. One household operating at maximum capacity with zero regrets.</p>
+        </div>
+        <div class="crew-grid">
+
+            <div class="crew-card fade-in">
+                <div class="crew-photo">
+                    <img src="/api/placeholder/260/210" alt="Spitz">
+                    <div class="crew-bow" style="background:#c8c8c8; color:#4a4a4a;">🎀</div>
+                    <div class="bail-ribbon green">Home Safe</div>
+                </div>
+                <div class="crew-info">
+                    <div class="crew-name">Spitz</div>
+                    <div class="crew-handle">The OG. Storm survivor. Gray tie pending.</div>
+                    <div class="crew-bio">Survived a storm, a creek, and his own permanent attitude. Was feral long before feral was a vibe.</div>
+                    <span class="crew-status status-home">Rehabilitated</span>
+                </div>
+            </div>
+
+            <div class="crew-card fade-in">
+                <div class="crew-photo">
+                    <img src="/api/placeholder/260/210" alt="Gizmo">
+                    <div class="crew-bow" style="background:#4A4A4A; color:#ccc;">🎀</div>
+                    <div class="bail-ribbon green">Home Safe</div>
+                </div>
+                <div class="crew-info">
+                    <div class="crew-name">Gizmo</div>
+                    <div class="crew-handle">Bottle-fed. Gray tie. Small landlord energy.</div>
+                    <div class="crew-bio">Raised by hand from day one. Now operates like he owns the building and you owe back rent in treats.</div>
+                    <span class="crew-status status-home">Rehabilitated</span>
+                </div>
+            </div>
+
+            <div class="crew-card fade-in">
+                <div class="crew-photo">
+                    <img src="/api/placeholder/260/210" alt="Tex">
+                    <div class="crew-bow" style="background:#D4A574; color:#3a2010;">🎀</div>
+                    <div class="bail-ribbon green">Home Safe</div>
+                </div>
+                <div class="crew-info">
+                    <div class="crew-name">Tex</div>
+                    <div class="crew-handle">Former truck-dweller. Tan tie. Indoor aristocrat.</div>
+                    <div class="crew-bio">Lived under an 18-wheeler. Now fully indoors, fully formal, convinced this was always the plan.</div>
+                    <span class="crew-status status-home">Rehabilitated</span>
+                </div>
+            </div>
+
+            <div class="crew-card fade-in">
+                <div class="crew-photo">
+                    <img src="/api/placeholder/260/210" alt="Dallas">
+                    <div class="crew-bow" style="background:#4A90E2; color:#fff;">🎀</div>
+                    <div class="bail-ribbon green">Home Safe</div>
+                </div>
+                <div class="crew-info">
+                    <div class="crew-name">Dallas</div>
+                    <div class="crew-handle">Blue tie. The Biggest Win. Mom's boy.</div>
+                    <div class="crew-bio">Arrived feral and furious. Now demands chest scratches at 5 AM sharp. Gave Merry cat scratch fever. Worth it.</div>
+                    <span class="crew-status status-home">Rehabilitated</span>
+                </div>
+            </div>
+
+            <div class="crew-card fade-in">
+                <div class="crew-photo">
+                    <img src="/api/placeholder/260/210" alt="Nova">
+                    <div class="crew-bow" style="background:linear-gradient(135deg,#e060a0,#fff,#e060a0); color:#880050;">💎</div>
+                    <div class="bail-ribbon">On Her Terms</div>
+                </div>
+                <div class="crew-info">
+                    <div class="crew-name">Nova</div>
+                    <div class="crew-handle">Rhinestone collar. Brad's girl. Extra.</div>
+                    <div class="crew-bio">5 pounds. 6 months old. Four babies. She saved us when we needed it most. Still learning trust is safe. On her terms.</div>
+                    <span class="crew-status status-progress">In Recovery</span>
+                </div>
+            </div>
+
+            <div class="crew-card fade-in">
+                <div class="crew-photo">
+                    <img src="/api/placeholder/260/210" alt="Mack">
+                    <div class="crew-bow" style="background:#cc2222; color:#fff;">🎀</div>
+                    <div class="bail-ribbon green">Home Safe</div>
+                </div>
+                <div class="crew-info">
+                    <div class="crew-name">Mack</div>
+                    <div class="crew-handle">25% Maine Coon. Red tie. Refrigerator Criminal.</div>
+                    <div class="crew-bio">Golden retriever in a cat suit. Bobtail. 12 pounds at 10 months. Ate the Popeyes. Felt no remorse whatsoever.</div>
+                    <span class="crew-status status-home">Rehabilitated</span>
+                </div>
+            </div>
+
+            <div class="crew-card fade-in">
+                <div class="crew-photo">
+                    <img src="/api/placeholder/260/210" alt="Diva">
+                    <div class="crew-bow" style="background:linear-gradient(135deg,#e060a0,#fff,#e060a0); color:#880050;">💎</div>
+                    <div class="bail-ribbon green">Home Safe</div>
+                </div>
+                <div class="crew-info">
+                    <div class="crew-name">Diva</div>
+                    <div class="crew-handle">Rhinestone. Bobtail. Head of Bugzilla Ops.</div>
+                    <div class="crew-bio">Fetch-obsessed, high-strung, runs bug investigations with prejudice. The flower collar was never optional.</div>
+                    <span class="crew-status status-home">Rehabilitated</span>
+                </div>
+            </div>
+
+            <div class="crew-card fade-in">
+                <div class="crew-photo">
+                    <img src="/api/placeholder/260/210" alt="Astro">
+                    <div class="crew-bow" style="background:#6040a0; color:#e0d0ff;">🎀</div>
+                    <div class="bail-ribbon">Prime Suspect</div>
+                </div>
+                <div class="crew-info">
+                    <div class="crew-name">Astro</div>
+                    <div class="crew-handle">Purple tie. Perpetually hungry. Denies everything.</div>
+                    <div class="crew-bio">Gentle giant. Long legs. Heard a snack bag from three rooms away. Currently under investigation. Claims amnesia.</div>
+                    <span class="crew-status status-home">Rehabilitated</span>
+                </div>
+            </div>
+
+            <div class="crew-card fade-in">
+                <div class="crew-photo">
+                    <img src="/api/placeholder/260/210" alt="Cosmo">
+                    <div class="crew-bow" style="background:#4a6a4a; color:#c0e0c0;">🎀</div>
+                    <div class="bail-ribbon green">On Patrol</div>
+                </div>
+                <div class="crew-info">
+                    <div class="crew-name">Cosmo</div>
+                    <div class="crew-handle">Green tie. House security. 3 AM specialist.</div>
+                    <div class="crew-bio">Fully committed to perimeter security at all hours. The house would fall apart without him. This is not up for debate.</div>
+                    <span class="crew-status status-home">Rehabilitated</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<div class="warm-divider"></div>
+
+<!-- ==================== NOVA FEATURE ==================== -->
+<section class="section section-dark" id="nova">
+    <div class="wrap">
+        <div class="nova-feature">
+            <div class="nova-photos fade-in">
+                <div class="nova-frame nova-frame-a">
+                    <div class="cam-badge">
+                        <div class="cam-dot"></div>
+                        <span class="cam-text">Ring • June 2025</span>
+                    </div>
+                    <img src="/api/placeholder/560/280" alt="Nova — deck, first sighting">
+                    <div class="nf-cap">She looked right into the camera. I said: I'm saving you.</div>
+                </div>
+                <div class="nova-frame nova-frame-b">
+                    <img src="/api/placeholder/400/220" alt="Nova now — pink bow tie sunroom">
+                    <div class="nf-cap">Now. Sunroom. Pink bow tie. Exactly as extra as she earned.</div>
+                </div>
+            </div>
+
+            <div class="nova-story fade-in">
+                <span class="section-eyebrow light">The Story That Started Everything</span>
+                <h2>Some Moments<br>Aren't Random.<br><em>They're Assignments.</em></h2>
+                <div class="nova-byline">Nova. June 2025. 5 lbs. Four babies. 2 AM.</div>
+                <p>The house was heavy. We were grieving before we had permission to grieve. And then a Ring camera caught a small black cat on the deck — terrified, feral, barely six months old — trying to keep four babies alive on a body that had nothing left to give.</p>
+                <p>At 2 AM she brought all four babies to the garage. I closed the door. Five terrified lives came in that night. Every trip to the basement after that, we smiled. Grief started to lift. Laughter came back. Slowly. In a basement. Because of five cats who had no idea what they were doing to us.</p>
+                <div class="nova-pullquote">"We thought we were saving them. The truth is, they saved us."</div>
+                <a href="nova-story.html" class="btn-primary">Read Her Full Story</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="warm-divider"></div>
+
+<!-- ==================== DIARIES ==================== -->
+<section class="section section-warm" id="diaries">
+    <div class="wrap">
+        <div class="section-header fade-in">
+            <span class="section-eyebrow">Latest Entries</span>
+            <h2 class="section-title">The <em>Diaries</em></h2>
+            <p class="section-sub">Filed daily. Suspects identified. Most deny everything. All are fed regardless.</p>
+        </div>
+        <div class="diaries-grid">
+
+            <div class="diary-card fade-in">
+                <div class="diary-img">
+                    <img src="/api/placeholder/400/195" alt="Auto feeder">
+                    <span class="diary-tag dt-chaos">Chaos</span>
+                </div>
+                <div class="diary-body">
+                    <div class="diary-case">Entry #289</div>
+                    <h3>The Night the Auto Feeder Became a Crime Scene</h3>
+                    <div class="diary-reporter">Narrated by: Astro (reluctantly)</div>
+                </div>
+            </div>
+
+            <div class="diary-card fade-in">
+                <div class="diary-img">
+                    <img src="/api/placeholder/400/195" alt="Nova breakthrough">
+                    <span class="diary-tag dt-rescue">Breakthrough</span>
+                </div>
+                <div class="diary-body">
+                    <div class="diary-case">Entry #290</div>
+                    <h3>Nova Let Me Pet Her For Ten Full Seconds</h3>
+                    <div class="diary-reporter">Narrated by: Nova (extremely reluctantly)</div>
+                </div>
+            </div>
+
+            <div class="diary-card fade-in">
+                <div class="diary-img">
+                    <img src="/api/placeholder/400/195" alt="Popeyes incident">
+                    <span class="diary-tag dt-snack">Snack Crime</span>
+                </div>
+                <div class="diary-body">
+                    <div class="diary-case">Entry #291</div>
+                    <h3>Mack Opened the Fridge and Ate My Entire Popeyes Order</h3>
+                    <div class="diary-reporter">Narrated by: Mack (with zero remorse)</div>
+                </div>
+            </div>
+
+            <div class="diary-card fade-in">
+                <div class="diary-img">
+                    <img src="/api/placeholder/400/195" alt="Treat cabinet">
+                    <span class="diary-tag dt-snack">3 AM</span>
+                </div>
+                <div class="diary-body">
+                    <div class="diary-case">Entry #292</div>
+                    <h3>The Treat Cabinet Investigation: Third Night Running</h3>
+                    <div class="diary-reporter">Narrated by: Anonymous (it's Astro)</div>
+                </div>
+            </div>
+
+            <div class="diary-card fade-in">
+                <div class="diary-img">
+                    <img src="/api/placeholder/400/195" alt="Diva bugzilla">
+                    <span class="diary-tag dt-bug">Bugzilla</span>
+                </div>
+                <div class="diary-body">
+                    <div class="diary-case">Entry #293</div>
+                    <h3>Diva Opens a Formal Bathroom Spider Investigation</h3>
+                    <div class="diary-reporter">Lead Investigator: Diva, Head of Operations</div>
+                </div>
+            </div>
+
+            <div class="diary-card fade-in">
+                <div class="diary-img">
+                    <img src="/api/placeholder/400/195" alt="4am footage">
+                    <span class="diary-tag dt-night">Surveillance</span>
+                </div>
+                <div class="diary-body">
+                    <div class="diary-case">Entry #294</div>
+                    <h3>What Happens at 4 AM When Everyone Thinks I'm Asleep</h3>
+                    <div class="diary-reporter">Narrated by: The Entire Household</div>
+                </div>
+            </div>
+
+        </div>
+        <div class="center">
+            <a href="#" class="view-all">Read All Diary Entries →</a>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== BAIL BOND ==================== -->
+<section class="bail-section section" id="bail">
+    <div class="wrap bail-inner">
+        <div class="bail-header fade-in">
+            <span class="section-eyebrow light">This Week's Violations</span>
+            <h2 class="section-title light">Active <em style="color:var(--gold-light)">Investigations</em></h2>
+            <p class="section-sub light">Every suspect has been fed. None have been deterred.</p>
+        </div>
+        <div class="bail-grid">
+
+            <div class="bail-card active fade-in">
+                <div class="bail-card-header">
+                    <span class="bail-num">Case No. 247</span>
+                    <span class="bail-status bs-open">⚡ Still Open</span>
+                </div>
+                <h4>Kibble Theft — 3rd Offense</h4>
+                <div class="bail-perp">Prime Suspect: Astro</div>
+                <p class="bail-details">3 AM bowl emptying. Evidence: crumbs on nose. Suspect consumed the evidence before proceedings could commence. <span class="bail-note">We know it was you, Astro. We always know.</span></p>
+                <a href="#" class="bail-btn">Post Bail for Astro →</a>
+            </div>
+
+            <div class="bail-card bugzilla fade-in">
+                <div class="bail-card-header">
+                    <span class="bail-num">Bugzilla No. 089</span>
+                    <span class="bail-status bs-bugzilla">Diva: Handling It</span>
+                </div>
+                <h4>Spider — Bathroom, Northeast Corner</h4>
+                <div class="bail-perp">Lead: Diva, Head of Operations</div>
+                <p class="bail-details">47 minutes of intense surveillance. Multiple threat assessments filed. Spider relocated by human intervention. Case closed with prejudice. Diva submitted a formal complaint about the resolution. <span class="bail-note">She was not consulted.</span></p>
+                <a href="#" class="bail-btn">View Diva's Report →</a>
+            </div>
+
+            <div class="bail-card fade-in">
+                <div class="bail-card-header">
+                    <span class="bail-num">Case No. 248</span>
+                    <span class="bail-status bs-closed">Case Closed</span>
+                </div>
+                <h4>Cosmo's Patrol: Off-Route Deviation</h4>
+                <div class="bail-perp">Self-Reported: Cosmo, Security Division</div>
+                <p class="bail-details">Standard perimeter check deviated to investigate a paper bag near the kitchen. Threat level: none. Bag re-investigated eleven additional times. <span class="bail-note">Standard procedure. The bag was suspicious.</span></p>
+                <a href="#" class="bail-btn">Read Full Report →</a>
+            </div>
+
+        </div>
+        <div class="center">
+            <a href="#" class="view-all light">View All Cold Cases →</a>
+        </div>
+    </div>
+</section>
+
+<div class="warm-divider"></div>
+
+<!-- ==================== SURVIVAL GUIDE ==================== -->
+<section class="section section-paper" id="tips">
+    <div class="wrap">
+        <div class="section-header fade-in">
+            <span class="section-eyebrow">For the Outnumbered</span>
+            <h2 class="section-title">Survival <em>Guide</em></h2>
+            <p class="section-sub">What actually works when you're nine cats deep and still optimistic about it.</p>
+        </div>
+        <div class="tips-grid">
+            <div class="tip-card fade-in">
+                <div class="tip-num">01</div>
+                <div class="tip-cat">Feeding Systems</div>
+                <h3>The Schedule That Stopped the Food Wars</h3>
+                <p>Separate stations, scheduled meals, and the one cat who still tries to steal from everyone. <span class="tip-hand">(Looking at you, Astro.)</span></p>
+            </div>
+            <div class="tip-card fade-in">
+                <div class="tip-num">02</div>
+                <div class="tip-cat">Litter Logistics</div>
+                <h3>Why We Have 10 Litter Boxes</h3>
+                <p>The N+1 rule is real. Here's how to make it work without it looking like a museum installation.</p>
+            </div>
+            <div class="tip-card fade-in">
+                <div class="tip-num">03</div>
+                <div class="tip-cat">Introductions</div>
+                <h3>Adding Cat #9 Without Starting a War</h3>
+                <p>The slow introduction that actually worked — and the shortcut we will never try again.</p>
+            </div>
+            <div class="tip-card fade-in">
+                <div class="tip-num">04</div>
+                <div class="tip-cat">Night Chaos</div>
+                <h3>Surviving the 3 AM Zoomies</h3>
+                <p>Why they run. Why they stop. And why you will never, not once, sleep through it. <span class="tip-hand">Ever.</span></p>
+            </div>
+            <div class="tip-card fade-in">
+                <div class="tip-num">05</div>
+                <div class="tip-cat">Enrichment</div>
+                <h3>Entertaining 9 Cats Without Going Broke</h3>
+                <p>Cardboard boxes, paper bags, and the occasional bug that wanders in. That's the budget. It works.</p>
+            </div>
+            <div class="tip-card fade-in">
+                <div class="tip-num">06</div>
+                <div class="tip-cat">DNA Testing</div>
+                <h3>What We Learned Testing Mack's DNA</h3>
+                <p>25% Maine Coon explains everything. Including the fridge. Also there are medical reasons to do this. <span class="tip-hand">Genuinely.</span></p>
+            </div>
+        </div>
+        <div class="center">
+            <a href="#" class="view-all">View All Survival Tactics →</a>
+        </div>
+    </div>
+</section>
+
+<div class="warm-divider"></div>
+
+<!-- ==================== RESCUE ==================== -->
+<section class="section section-warm" id="rescue">
+    <div class="wrap">
+        <div class="section-header fade-in">
+            <span class="section-eyebrow">Paying It Forward</span>
+            <h2 class="section-title">Featured <em>Ally</em></h2>
+            <p class="section-sub">We spotlight rescues doing meaningful, patient, often unseen work — because people helped us and we don't forget that.</p>
+        </div>
+
+        <div class="rescue-feature fade-in">
+            <div class="rescue-img">
+                <img src="/api/placeholder/500/300" alt="Featured rescue">
+            </div>
+            <div class="rescue-content">
+                <h3>Second Chance Feline Rescue</h3>
+                <div class="rescue-loc">📍 Atlanta Area</div>
+                <p>We spotlight rescues doing the real work — especially the patient, messy, often invisible kind. Organizations that take in the ferals, the semi-ferals, the ones other rescues can't place. The ones that take time.</p>
+                <p>Because that's exactly what it took for Nova. For Dallas. For all nine of them. Time, patience, and people who didn't give up.</p>
+                <div class="rescue-btns">
+                    <a href="#" class="btn-primary">Visit Their Site</a>
+                    <a href="#" class="btn-green">Donate</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="rescue-submit fade-in">
+            <div>
+                <h4>Want Your Rescue Featured?</h4>
+                <p>We rotate spotlights every month. Share your story and connect with people who understand what this work actually takes.</p>
+            </div>
+            <button class="btn-primary" onclick="openModal()">Submit Your Rescue</button>
+        </div>
+    </div>
+</section>
+
+<div class="warm-divider"></div>
+
+<!-- ==================== MERCH ==================== -->
+<section class="section section-cream" id="merch">
+    <div class="wrap">
+        <div class="section-header fade-in">
+            <span class="section-eyebrow">For People Who Get It</span>
+            <h2 class="section-title">Wear the <em>Chaos</em></h2>
+            <p class="section-sub">Merch for multi-cat households, rescue advocates, and everyone who has hidden their Popeyes too late.</p>
+        </div>
+        <div class="merch-grid">
+            <div class="merch-card fade-in">
+                <div class="merch-mock"><div class="merch-mock-text">Prisoners With Snacks</div></div>
+                <h3>"Prisoners With Snacks"</h3>
+                <div class="merch-desc">Classic tee for the household staff</div>
+                <div class="merch-price">$28</div>
+                <a href="#" class="btn-primary" style="font-size:0.85rem; padding:0.8rem 1.5rem;">Shop Now</a>
+            </div>
+            <div class="merch-card fade-in">
+                <div class="merch-mock"><div class="merch-mock-text">Bugzilla Watch</div></div>
+                <h3>"Bugzilla Watch"</h3>
+                <div class="merch-desc">For Diva's extended fanbase</div>
+                <div class="merch-price">$28</div>
+                <a href="#" class="btn-primary" style="font-size:0.85rem; padding:0.8rem 1.5rem;">Shop Now</a>
+            </div>
+            <div class="merch-card fade-in">
+                <div class="merch-mock"><div class="merch-mock-text">Feral to Formal</div></div>
+                <h3>"Feral to Formal"</h3>
+                <div class="merch-desc">The rescue arc you know by heart</div>
+                <div class="merch-price">$18</div>
+                <a href="#" class="btn-primary" style="font-size:0.85rem; padding:0.8rem 1.5rem;">Shop Now</a>
+            </div>
+            <div class="merch-card fade-in">
+                <div class="merch-mock"><div class="merch-mock-text">3 AM Zoomies Club</div></div>
+                <h3>"3 AM Zoomies Club"</h3>
+                <div class="merch-desc">Founding members only</div>
+                <div class="merch-price">$48</div>
+                <a href="#" class="btn-primary" style="font-size:0.85rem; padding:0.8rem 1.5rem;">Shop Now</a>
+            </div>
+        </div>
+        <div class="center">
+            <a href="#" class="view-all">Shop All Merch →</a>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== NEWSLETTER ==================== -->
+<section class="newsletter" id="newsletter">
+    <div class="wrap">
+        <div class="nl-inner">
+            <h2>Come On In.</h2>
+            <p>The chaos is warm. The Fancy Feast is plentiful. No spam — just bow ties, diaries, rescue spotlights, and the occasional Popeyes update.</p>
+            <form class="nl-form">
+                <input type="email" placeholder="your@email.com" required>
+                <button type="submit">Pull Up a Chair</button>
+            </form>
+            <div class="nl-perks">
+                <span>📖 Weekly Diaries</span>
+                <span>🐾 Rescue Spotlights</span>
+                <span>🛠 Survival Tips</span>
+                <span>🎀 Behind the Bow Ties</span>
+                <span>🍗 Popeyes Incident Updates</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+<footer class="site-footer">
+    <div class="wrap">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <h2>Our <span>Fur</span> Life</h2>
+                <div class="sub">9 Bow Ties. Real Rescue. Maximum Chaos.</div>
+                <p>Nine rescued souls and the house that went from grief-heavy silence to joyful, magnificent bedlam. Built with love, Fancy Feast, and a questionable number of litter boxes.</p>
+            </div>
+            <div class="footer-col">
+                <h5>The Crew</h5>
+                <a href="#crew">The Lineup</a>
+                <a href="nova-story.html">Nova's Story</a>
+                <a href="#">Dallas's File</a>
+                <a href="#">Cat Profiles</a>
+            </div>
+            <div class="footer-col">
+                <h5>Content</h5>
+                <a href="#diaries">The Diaries</a>
+                <a href="#tips">Survival Guide</a>
+                <a href="#bail">Active Investigations</a>
+                <a href="#">Archive</a>
+            </div>
+            <div class="footer-col">
+                <h5>More</h5>
+                <a href="#merch">Merch</a>
+                <a href="#rescue">Featured Rescues</a>
+                <a href="#newsletter">Newsletter</a>
+                <a href="#">TikTok</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="footer-copy">© 2025 Our Fur Life · <em>Real rescue. Real chaos. Real love.</em></div>
+            <div class="footer-copy">Made with too much coffee, not enough sleep, and nine very strong opinions about Fancy Feast.</div>
+        </div>
+    </div>
+</footer>
+
+<!-- ==================== MODAL ==================== -->
+<div class="modal-overlay" id="rescueModal">
+    <div class="modal">
+        <div class="modal-head">
+            <h3>Submit Your Rescue</h3>
+            <button class="modal-close" onclick="closeModal()">×</button>
+        </div>
+        <div class="modal-body">
+            <form id="rescueForm">
+                <div class="form-group">
+                    <label>Rescue Organization Name *</label>
+                    <input type="text" required placeholder="What you're called">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Contact Name *</label>
+                        <input type="text" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email *</label>
+                        <input type="email" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Website *</label>
+                        <input type="url" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Location *</label>
+                        <input type="text" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Tell Us Your Story *</label>
+                    <textarea rows="4" placeholder="Who you are, what you do, why it matters..." required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>How Can People Support You?</label>
+                    <input type="text" placeholder="Donate, adopt, foster, volunteer...">
+                </div>
+                <button type="submit" class="btn-primary" style="width:100%; margin-top:0.5rem; clip-path:none;">Submit for Review</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', e => {
+            e.preventDefault();
+            const t = document.querySelector(a.getAttribute('href'));
+            if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+    });
+
+    // Fade in observer
+    const faders = document.querySelectorAll('.fade-in');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, i) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => entry.target.classList.add('visible'), i * 60);
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+
+    faders.forEach(el => observer.observe(el));
+
+    window.addEventListener('load', () => {
+        faders.forEach(el => {
+            if (el.getBoundingClientRect().top < window.innerHeight) {
+                el.classList.add('visible');
+            }
+        });
+    });
+
+    // Newsletter
+    document.querySelector('.nl-form').addEventListener('submit', e => {
+        e.preventDefault();
+        const email = e.target.querySelector('input').value;
+        alert(`Welcome to the chaos, friend.\n\n${email} is on the list.\n\nExpect warm bedlam in your inbox. 🐾`);
+        e.target.reset();
+    });
+
+    // Modal
+    function openModal() {
+        document.getElementById('rescueModal').classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+        document.getElementById('rescueModal').classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    document.getElementById('rescueModal').addEventListener('click', e => {
+        if (e.target === e.currentTarget) closeModal();
+    });
+
+    document.getElementById('rescueForm').addEventListener('submit', e => {
+        e.preventDefault();
+        alert('Submission received.\n\nYour rescue is under review. We\'ll be in touch if selected.\n\nKeep doing the work that matters. 🐾');
+        closeModal();
+        e.target.reset();
+    });
+</script>
+</body>
+</html>
