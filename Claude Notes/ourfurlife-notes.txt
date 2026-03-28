@@ -1,0 +1,18 @@
+OUR FUR LIFE — WHERE WE ARE (March 27 2026)
+
+SITE: spectacular-pasca-8e3eb8.netlify.app (live)
+DOMAIN: ourfurlife.com (DNS propagating — check tomorrow)
+GITHUB: github.com/merrygrant-rgb/ourfurlife
+LOCAL FILES: Documents → ourfurlife
+TERMINAL: Use Git Bash NOT PowerShell
+
+NEXT STEPS:
+- Swap placeholder images with real photos in HTML files
+- Rename Spitz/Gizmo/Nova/Dallas photos
+- Push updates to GitHub (auto deploys to Netlify)
+- Add christmas village destruction photo to Tex story 😂
+
+PUSH COMMAND:
+git add .
+git commit -m "your message here"
+git push
