@@ -9,22 +9,22 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Caveat:wght@400;600;700&family=DM+Sans:wght@400;500;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --ink: #1a1008;
-            --warm-dark: #2d1f0e;
-            --amber: #c4530a;
-            --amber-light: #e8650f;
-            --cream: #fdf4e3;
-            --warm-white: #fffaf2;
-            --paper: #f5ead0;
-            --gold: #e8a020;
-            --gold-light: #f5c842;
-            --blush: #e8a0a0;
-            --soft-pink: #f5e8e8;
-            --rescue-green: #3a7c4a;
-            --smoke: #7a6a58;
-            --mid: #a08060;
-            --night: #0d1117;
-            --night-blue: #1a2332;
+            --ink: #221b16;
+            --warm-dark: #2a2119;
+            --amber: #9a7346;
+            --amber-light: #b08d5e;
+            --cream: #fbf7f0;
+            --warm-white: #fffdfa;
+            --paper: #f4ede1;
+            --gold: #b89152;
+            --gold-light: #d9b872;
+            --blush: #c9a0a8;
+            --soft-pink: #f2ece6;
+            --rescue-green: #5c7a5e;
+            --smoke: #6e6357;
+            --mid: #9a8f82;
+            --night: #1c1611;
+            --night-blue: #232b2e;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -102,7 +102,7 @@
             position: absolute;
             inset: 0;
             background: radial-gradient(ellipse at 30% 40%, rgba(74,100,160,0.15) 0%, transparent 60%),
-                        radial-gradient(ellipse at 70% 60%, rgba(196,83,10,0.08) 0%, transparent 50%);
+                        radial-gradient(ellipse at 70% 60%, rgba(154,115,70,0.08) 0%, transparent 50%);
             pointer-events: none;
         }
 
@@ -134,7 +134,7 @@
         .cam-dot {
             width: 10px;
             height: 10px;
-            background: #ff4444;
+            background: #a8443c;
             border-radius: 50%;
             animation: blink-cam 2s infinite;
         }
@@ -384,7 +384,7 @@
             max-width: 680px;
         }
 
-        .story-body.light { color: #8a7060; }
+        .story-body.light { color: #7d7265; }
         .story-body.on-dark { color: rgba(253,244,227,0.65); }
 
         .story-body p { margin-bottom: 1.5rem; }
@@ -465,7 +465,7 @@
             top: 8px;
             left: 10px;
             font-size: 0.65rem;
-            color: #ff4444;
+            color: #a8443c;
             letter-spacing: 0.1em;
             font-weight: 800;
             z-index: 5;
@@ -491,7 +491,7 @@
             border-left: 4px solid var(--amber);
             padding: 1.5rem 2rem;
             margin: 3rem 0;
-            background: rgba(196,83,10,0.06);
+            background: rgba(154,115,70,0.06);
         }
 
         .pullquote p {
@@ -679,7 +679,7 @@
         .mission-close h2 {
             font-family: 'Playfair Display', serif;
             font-size: clamp(2rem, 4vw, 3.5rem);
-            color: #e0f0e4;
+            color: #e9efe8;
             margin-bottom: 1.5rem;
             position: relative;
             z-index: 1;
@@ -727,7 +727,7 @@
         .btn-outline-cream {
             display: inline-block;
             background: transparent;
-            color: #e0f0e4;
+            color: #e9efe8;
             padding: 1rem 2.2rem;
             font-weight: 800;
             text-decoration: none;
@@ -772,7 +772,7 @@
         }
 
         .footer-nav a {
-            color: #5a4030;
+            color: #4b4139;
             text-decoration: none;
             font-size: 0.85rem;
             font-weight: 600;
@@ -830,7 +830,7 @@
 <!-- ==================== HERO ==================== -->
 <section class="hero">
     <div class="hero-image-container">
-        <img src="images_ph/nova-1400x900.svg" alt="Nova — driveway security camera footage, June 2025" loading="lazy">
+        <img src="img/nova/nova-1400x900.webp" alt="Nova — driveway security camera footage, June 2025" loading="lazy">
     </div>
 
     <div class="cam-overlay">
@@ -908,11 +908,11 @@
             </div>
             <div class="fade-in">
                 <div class="frame frame-cam frame-main">
-                    <img src="images_ph/nova-on-the-deck-560x420.svg" alt="Nova on the deck — first sighting" loading="lazy">
+                    <img src="img/nova/nova-on-the-deck-560x420.webp" alt="Nova on the deck — first sighting" loading="lazy">
                     <div class="frame-caption">First sighting. She looked into my soul.</div>
                 </div>
                 <div class="frame frame-cam frame-secondary">
-                    <img src="images_ph/nova-by-the-van-380x280.svg" alt="Nova by the van — skin and bones" loading="lazy">
+                    <img src="img/nova/nova-by-the-van-380x280.webp" alt="Nova by the van — skin and bones" loading="lazy">
                     <div class="frame-caption">By the van. Skin and bones. Nursing four babies.</div>
                 </div>
             </div>
@@ -940,7 +940,7 @@
             </div>
             <div class="fade-in">
                 <div class="frame frame-light frame-main">
-                    <img src="images_ph/nova-on-deck-560x500.svg" alt="Nova on deck — first contact" loading="lazy">
+                    <img src="img/nova/nova-on-deck-560x500.webp" alt="Nova on deck — first contact" loading="lazy">
                     <div class="frame-caption" style="background:var(--ink);">She looked right at me. I looked right back.</div>
                 </div>
             </div>
@@ -968,11 +968,11 @@
             </div>
             <div class="fade-in">
                 <div class="frame frame-cam frame-main">
-                    <img src="images_ph/night-vision-520x380.svg" alt="Night vision — garage — all five cats" loading="lazy">
+                    <img src="img/nova/night-vision-520x380.webp" alt="Night vision — garage — all five cats" loading="lazy">
                     <div class="frame-caption">Blink camera. 2:17 AM. All five came in.</div>
                 </div>
                 <div class="frame frame-cam frame-secondary">
-                    <img src="images_ph/basement-360x260.svg" alt="Basement — first night safe" loading="lazy">
+                    <img src="img/nova/basement-360x260.webp" alt="Basement — first night safe" loading="lazy">
                     <div class="frame-caption">First night safe. Five exhausted babies.</div>
                 </div>
             </div>
@@ -1022,11 +1022,11 @@
             </div>
             <div class="fade-in">
                 <div class="frame frame-light frame-main">
-                    <img src="images_ph/nova-babies-on-the-blanket-560x420.svg" alt="Nova babies on the blanket — safe" loading="lazy">
+                    <img src="img/nova/nova-babies-on-the-blanket-560x420.webp" alt="Nova babies on the blanket — safe" loading="lazy">
                     <div class="frame-caption" style="background:var(--ink);">Safe. Warm. The basement that changed everything.</div>
                 </div>
                 <div class="frame frame-light frame-secondary">
-                    <img src="images_ph/kittens-380x280.svg" alt="Kittens — Mack and Diva tiny" loading="lazy">
+                    <img src="img/nova/kittens-380x280.webp" alt="Kittens — Mack and Diva tiny" loading="lazy">
                     <div class="frame-caption" style="background:var(--ink);">Baby Mack & Diva. Before the Popeyes incident.</div>
                 </div>
             </div>
@@ -1046,28 +1046,28 @@
 
         <div class="babies-grid fade-in">
             <div class="baby-card">
-                <img src="images_ph/mack-400x220.svg" alt="Mack" loading="lazy">
+                <img src="img/nova/mack-400x220.webp" alt="Mack" loading="lazy">
                 <div class="baby-info">
                     <div class="baby-name">Mack 🔴</div>
                     <div class="baby-bio">25% Maine Coon. Red bow tie. Opened the fridge. Zero remorse.</div>
                 </div>
             </div>
             <div class="baby-card">
-                <img src="images_ph/diva-400x220.svg" alt="Diva" loading="lazy">
+                <img src="img/nova/diva-400x220.webp" alt="Diva" loading="lazy">
                 <div class="baby-info">
                     <div class="baby-name">Diva 🌸</div>
                     <div class="baby-bio">Bobtail queen. Pink flower collar. Head of Bugzilla Operations.</div>
                 </div>
             </div>
             <div class="baby-card">
-                <img src="images_ph/astro-400x220.svg" alt="Astro" loading="lazy">
+                <img src="img/nova/astro-400x220.webp" alt="Astro" loading="lazy">
                 <div class="baby-info">
                     <div class="baby-name">Astro 💜</div>
                     <div class="baby-bio">Night kid. Purple bow tie. Perpetually hungry. Prime suspect.</div>
                 </div>
             </div>
             <div class="baby-card">
-                <img src="images_ph/cosmo-400x220.svg" alt="Cosmo" loading="lazy">
+                <img src="img/nova/cosmo-400x220.webp" alt="Cosmo" loading="lazy">
                 <div class="baby-info">
                     <div class="baby-name">Cosmo 🟢</div>
                     <div class="baby-bio">Also a night kid. Green tie. Convinced the house needs his patrol. He's right.</div>
@@ -1129,11 +1129,11 @@
             </div>
             <div class="fade-in">
                 <div class="frame frame-light frame-main">
-                    <img src="images_ph/nova-now-540x460.svg" alt="Nova now — pink bow tie, sunroom" loading="lazy">
+                    <img src="img/nova/nova-now-540x460.webp" alt="Nova now — pink bow tie, sunroom" loading="lazy">
                     <div class="frame-caption" style="background:var(--ink);">Nova now. Pink bow tie. Sunroom. Still on her terms.</div>
                 </div>
                 <div class="frame frame-light frame-secondary" style="margin-top: 1.5rem;">
-                    <img src="images_ph/all-four-at-the-window-380x260.svg" alt="All four at the window — sunroom" loading="lazy">
+                    <img src="img/nova/all-four-at-the-window-380x260.webp" alt="All four at the window — sunroom" loading="lazy">
                     <div class="frame-caption" style="background:var(--ink);">Their favorite place on the planet. Their sunroom.</div>
                 </div>
             </div>
