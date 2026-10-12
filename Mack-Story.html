@@ -1,0 +1,1379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mack's File | Our Fur Life</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Caveat:wght@400;600;700&family=DM+Sans:wght@400;500;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ink: #1a1008;
+            --warm-dark: #2d1f0e;
+            --cream: #fdf4e3;
+            --warm-white: #fffaf2;
+            --paper: #f5ead0;
+            --smoke: #7a6a58;
+            --mid: #a08060;
+            --night: #0d1117;
+
+            /* MACK PALETTE — Charcoal & Red */
+            --mack-red: #c0292e;
+            --mack-red-light: #e03535;
+            --mack-red-deep: #8a1a1e;
+            --mack-charcoal: #1c1c1e;
+            --mack-charcoal-mid: #2a2a2e;
+            --mack-charcoal-light: #3a3a40;
+            --mack-warm-grey: #4a4048;
+            --mack-stripe: #5a3030;
+            --mack-gold: #d4a020;
+            --mack-gold-light: #f0c040;
+            --mack-cream-warm: #fdf0e0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--warm-white);
+            color: var(--ink);
+            overflow-x: hidden;
+        }
+
+        /* Grain texture */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        /* ==================== NAV ==================== */
+        nav {
+            background: var(--mack-charcoal);
+            border-bottom: 3px solid var(--mack-red);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--cream);
+            text-decoration: none;
+            font-style: italic;
+        }
+
+        .nav-logo span { color: var(--mack-gold-light); font-style: normal; }
+
+        .nav-back {
+            color: var(--mack-red-light);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: color 0.2s;
+        }
+        .nav-back:hover { color: var(--mack-gold-light); }
+
+        /* ==================== HERO ==================== */
+        .hero {
+            background: var(--mack-charcoal);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at 30% 40%, rgba(192,41,46,0.15) 0%, transparent 55%),
+                        radial-gradient(ellipse at 80% 80%, rgba(212,160,32,0.08) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .hero-image-container {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+        }
+
+        .hero-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
+            opacity: 0.35;
+            filter: grayscale(10%) contrast(1.08);
+        }
+
+        .evidence-overlay {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            z-index: 10;
+        }
+
+        .evidence-tag {
+            background: rgba(192,41,46,0.15);
+            border: 1px solid rgba(192,41,46,0.4);
+            padding: 0.3rem 0.8rem;
+            font-family: 'DM Sans', monospace;
+            font-size: 0.7rem;
+            color: rgba(255,255,255,0.5);
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+        }
+
+        .cam-dot {
+            width: 10px;
+            height: 10px;
+            background: var(--mack-red);
+            border-radius: 50%;
+            animation: blink-cam 2.5s infinite;
+        }
+
+        @keyframes blink-cam {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.15; }
+        }
+
+        .cam-timestamp {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-family: 'DM Sans', monospace;
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.35);
+            letter-spacing: 0.1em;
+            z-index: 10;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 5;
+            padding: 4rem 4rem 5rem;
+            background: linear-gradient(transparent, rgba(28,28,30,0.97) 40%);
+        }
+
+        .case-file-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            background: var(--mack-red-deep);
+            color: var(--cream);
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            padding: 0.4rem 1rem;
+            margin-bottom: 1.5rem;
+            border: 2px solid rgba(192,41,46,0.4);
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3.5rem, 8vw, 7rem);
+            font-weight: 900;
+            color: var(--cream);
+            line-height: 0.92;
+            margin-bottom: 1rem;
+        }
+
+        .hero-title em {
+            font-style: italic;
+            color: var(--mack-red-light);
+        }
+
+        .hero-subtitle {
+            font-family: 'Caveat', cursive;
+            font-size: 1.6rem;
+            color: #c8b0b0;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            line-height: 1.4;
+            max-width: 620px;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 2.5rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-stat {
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+        }
+
+        .stat-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--mack-red-light);
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: rgba(255,255,255,0.35);
+        }
+
+        /* ==================== SCROLL INDICATOR ==================== */
+        .scroll-hint {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            color: rgba(255,255,255,0.3);
+            font-size: 0.7rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            animation: float 3s ease-in-out infinite;
+            z-index: 10;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-6px); }
+        }
+
+        .scroll-arrow {
+            width: 24px;
+            height: 24px;
+            border-right: 2px solid rgba(255,255,255,0.3);
+            border-bottom: 2px solid rgba(255,255,255,0.3);
+            transform: rotate(45deg);
+        }
+
+        /* ==================== OPENER ==================== */
+        .opener {
+            background: var(--mack-red-deep);
+            padding: 5rem 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .opener::before {
+            content: '"';
+            position: absolute;
+            font-family: 'Playfair Display', serif;
+            font-size: 30vw;
+            color: rgba(255,255,255,0.04);
+            top: -5vw;
+            left: -2vw;
+            line-height: 1;
+            pointer-events: none;
+        }
+
+        .opener-quote {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.6rem, 3.5vw, 2.8rem);
+            font-style: italic;
+            color: var(--cream);
+            line-height: 1.45;
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .opener-attr {
+            font-family: 'Caveat', cursive;
+            font-size: 1.2rem;
+            color: rgba(253,244,227,0.5);
+            text-align: center;
+            margin-top: 1.5rem;
+            font-weight: 700;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ==================== BORN READY BANNER ==================== */
+        .born-banner {
+            background: var(--mack-charcoal);
+            padding: 1.8rem 4rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .born-banner-text {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.1rem, 2vw, 1.6rem);
+            font-style: italic;
+            color: var(--mack-red-light);
+            letter-spacing: 0.05em;
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+
+        .born-divider {
+            color: rgba(192,41,46,0.4);
+            font-size: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ==================== STORY SECTIONS ==================== */
+        .story-section { padding: 6rem 0; }
+        .story-section.dark { background: var(--mack-charcoal); }
+        .story-section.charcoal-mid { background: var(--mack-charcoal-mid); }
+        .story-section.paper { background: var(--paper); }
+        .story-section.cream { background: var(--cream); }
+        .story-section.warm { background: var(--warm-white); }
+        .story-section.red-deep { background: var(--mack-red-deep); }
+
+        .story-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 3rem;
+        }
+
+        .chapter {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .chapter-line {
+            width: 40px;
+            height: 2px;
+            background: var(--mack-red);
+        }
+
+        .chapter-text {
+            font-family: 'Caveat', cursive;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--mack-red);
+            letter-spacing: 0.08em;
+        }
+
+        .chapter.light .chapter-text { color: var(--mack-red-light); }
+        .chapter.light .chapter-line { background: var(--mack-red-light); }
+        .chapter.gold .chapter-text { color: var(--mack-gold-light); }
+        .chapter.gold .chapter-line { background: var(--mack-gold-light); }
+
+        .story-heading {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.2rem, 4vw, 3.5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 2rem;
+        }
+
+        .story-heading.light { color: var(--cream); }
+        .story-heading.dark-text { color: var(--ink); }
+        .story-heading.red { color: #f0c0c0; }
+
+        .story-body {
+            font-size: 1.15rem;
+            line-height: 1.85;
+            color: var(--smoke);
+            max-width: 680px;
+        }
+
+        .story-body.on-dark { color: rgba(253,244,227,0.65); }
+        .story-body.on-red { color: rgba(253,220,215,0.75); }
+
+        .story-body p { margin-bottom: 1.5rem; }
+        .story-body p:last-child { margin-bottom: 0; }
+
+        .hand {
+            font-family: 'Caveat', cursive;
+            font-size: 1.3em;
+            font-weight: 700;
+            color: var(--mack-red);
+            display: inline;
+        }
+
+        .hand.light { color: var(--mack-red-light); }
+        .hand.gold { color: var(--mack-gold); }
+        .hand.gold-light { color: var(--mack-gold-light); }
+        .hand.cream { color: var(--cream); }
+
+        /* ==================== TWO COLUMN ==================== */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        .two-col.reverse { direction: rtl; }
+        .two-col.reverse > * { direction: ltr; }
+
+        /* ==================== FRAMES ==================== */
+        .frame {
+            background: var(--warm-dark);
+            border: 3px solid rgba(255,255,255,0.06);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .frame img {
+            width: 100%;
+            display: block;
+            object-fit: cover;
+        }
+
+        .frame-caption {
+            background: rgba(10,8,4,0.9);
+            padding: 0.7rem 1rem;
+            font-family: 'Caveat', cursive;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--mack-red-light);
+        }
+
+        .frame-main {
+            transform: rotate(-1.5deg);
+            box-shadow: 12px 12px 0 rgba(0,0,0,0.3);
+            margin-bottom: 1.5rem;
+        }
+
+        .frame-secondary {
+            width: 70%;
+            margin-left: auto;
+            transform: rotate(2deg);
+            box-shadow: 8px 8px 0 rgba(0,0,0,0.25);
+        }
+
+        .frame-light {
+            border-color: var(--paper);
+            box-shadow: 8px 8px 0 rgba(26,16,8,0.1);
+        }
+
+        .frame-light .frame-caption {
+            background: var(--warm-dark);
+        }
+
+        /* ==================== PULL QUOTE ==================== */
+        .pullquote {
+            border-left: 4px solid var(--mack-red);
+            padding: 1.5rem 2rem;
+            margin: 3rem 0;
+            background: rgba(192,41,46,0.06);
+        }
+
+        .pullquote p {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-style: italic;
+            line-height: 1.5;
+            color: var(--ink);
+            margin: 0;
+        }
+
+        .pullquote.on-dark {
+            background: rgba(192,41,46,0.1);
+            border-color: var(--mack-red-light);
+        }
+
+        .pullquote.on-dark p { color: var(--cream); }
+
+        /* ==================== DNA STAT CARDS ==================== */
+        .stat-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1.5rem;
+            margin: 3rem 0;
+        }
+
+        .stat-card {
+            background: var(--mack-charcoal-light);
+            border: 3px solid rgba(192,41,46,0.15);
+            padding: 1.8rem;
+            text-align: center;
+        }
+
+        .stat-card:nth-child(odd) { transform: rotate(-1deg); }
+        .stat-card:nth-child(even) { transform: rotate(1deg); }
+
+        .stat-card-num {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--mack-red-light);
+            line-height: 1;
+            margin-bottom: 0.3rem;
+        }
+
+        .stat-card-label {
+            font-family: 'Caveat', cursive;
+            font-size: 1rem;
+            font-weight: 700;
+            color: rgba(255,255,255,0.35);
+        }
+
+        /* ==================== SECTION DIVIDER ==================== */
+        .section-divider {
+            height: 4px;
+            background: linear-gradient(90deg, var(--mack-red-deep), var(--mack-red), var(--mack-red-deep));
+        }
+
+        /* ==================== THE STAIRS MOMENT ==================== */
+        .stairs-moment {
+            background: var(--mack-charcoal);
+            padding: 7rem 4rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stairs-moment::before {
+            content: "WHERE'S MY BABIES";
+            position: absolute;
+            font-family: 'Playfair Display', serif;
+            font-size: 9vw;
+            color: rgba(192,41,46,0.06);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            white-space: nowrap;
+            pointer-events: none;
+            font-weight: 900;
+            letter-spacing: 0.1em;
+        }
+
+        .stairs-call {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            font-style: italic;
+            color: var(--cream);
+            line-height: 1.15;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .stairs-call em { color: var(--mack-red-light); }
+
+        .stairs-response {
+            font-family: 'Caveat', cursive;
+            font-size: clamp(1.3rem, 2.5vw, 2rem);
+            color: rgba(253,244,227,0.55);
+            margin-bottom: 2.5rem;
+            position: relative;
+            z-index: 1;
+            line-height: 1.5;
+        }
+
+        .stairs-photo {
+            max-width: 500px;
+            margin: 0 auto 2.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .stairs-photo img {
+            width: 100%;
+            display: block;
+            border: 3px solid rgba(192,41,46,0.3);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        }
+
+        .stairs-photo-caption {
+            font-family: 'Caveat', cursive;
+            font-size: 1.1rem;
+            color: rgba(253,244,227,0.4);
+            margin-top: 0.8rem;
+            font-weight: 700;
+        }
+
+        .stairs-detail {
+            font-size: 1.05rem;
+            color: rgba(253,244,227,0.5);
+            max-width: 650px;
+            margin: 0 auto;
+            line-height: 1.75;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ==================== DNA SECTION ==================== */
+        .dna-section {
+            background: var(--mack-charcoal-mid);
+            padding: 5rem 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dna-section::before {
+            content: "DNA";
+            position: absolute;
+            font-family: 'Playfair Display', serif;
+            font-size: 25vw;
+            color: rgba(255,255,255,0.02);
+            top: 50%;
+            right: -2vw;
+            transform: translateY(-50%);
+            pointer-events: none;
+            font-weight: 900;
+        }
+
+        .dna-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .dna-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(192,41,46,0.2);
+            padding: 1.8rem;
+            position: relative;
+        }
+
+        .dna-pct {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            font-weight: 900;
+            color: var(--mack-red-light);
+            line-height: 1;
+            margin-bottom: 0.3rem;
+        }
+
+        .dna-breed {
+            font-weight: 800;
+            font-size: 0.95rem;
+            color: var(--cream);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 0.4rem;
+        }
+
+        .dna-desc {
+            font-family: 'Caveat', cursive;
+            font-size: 1rem;
+            color: rgba(255,255,255,0.3);
+            font-weight: 600;
+            line-height: 1.4;
+        }
+
+        .dna-alert {
+            background: rgba(192,41,46,0.12);
+            border: 2px solid rgba(192,41,46,0.4);
+            padding: 1.5rem 2rem;
+            margin-top: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .dna-alert-label {
+            font-size: 0.65rem;
+            font-weight: 800;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--mack-red-light);
+            margin-bottom: 0.5rem;
+        }
+
+        .dna-alert-text {
+            font-family: 'Caveat', cursive;
+            font-size: 1.25rem;
+            color: rgba(253,244,227,0.7);
+            font-weight: 700;
+            line-height: 1.5;
+        }
+
+        /* ==================== CLOSING ==================== */
+        .mack-close {
+            background: var(--mack-charcoal);
+            padding: 7rem 4rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mack-close::after {
+            content: "THE HANDSOME MENACE";
+            position: absolute;
+            font-family: 'Playfair Display', serif;
+            font-size: 7vw;
+            color: rgba(192,41,46,0.05);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            white-space: nowrap;
+            pointer-events: none;
+            font-weight: 900;
+            letter-spacing: 0.2em;
+        }
+
+        .mack-close h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            color: var(--cream);
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+            font-style: italic;
+        }
+
+        .mack-close h2 em { color: var(--mack-red-light); }
+
+        .mack-close p {
+            font-size: 1.1rem;
+            color: rgba(253,244,227,0.6);
+            max-width: 650px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.75;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ==================== MISSION CLOSE ==================== */
+        .mission-close {
+            background: var(--mack-red-deep);
+            padding: 6rem 4rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mission-close::before {
+            content: "NAMED AFTER A LEGEND";
+            position: absolute;
+            font-family: 'Playfair Display', serif;
+            font-size: 8vw;
+            color: rgba(255,255,255,0.04);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            white-space: nowrap;
+            pointer-events: none;
+            font-weight: 900;
+        }
+
+        .mission-close h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            color: #ffe0e0;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+            font-style: italic;
+        }
+
+        .mission-close p {
+            font-size: 1.1rem;
+            color: rgba(255,224,224,0.7);
+            max-width: 650px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.75;
+            position: relative;
+            z-index: 1;
+        }
+
+        .mission-btns {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn-cream {
+            display: inline-block;
+            background: var(--cream);
+            color: var(--mack-red-deep);
+            padding: 1rem 2.2rem;
+            font-weight: 800;
+            text-decoration: none;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            border: 3px solid var(--cream);
+            transition: all 0.25s;
+        }
+
+        .btn-cream:hover { background: transparent; color: var(--cream); }
+
+        .btn-outline-cream {
+            display: inline-block;
+            background: transparent;
+            color: #ffe0e0;
+            padding: 1rem 2.2rem;
+            font-weight: 800;
+            text-decoration: none;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            border: 3px solid rgba(255,224,224,0.4);
+            transition: all 0.25s;
+        }
+
+        .btn-outline-cream:hover { border-color: var(--cream); color: var(--cream); }
+
+        /* ==================== FOOTER ==================== */
+        .page-footer {
+            background: var(--ink);
+            border-top: 3px solid var(--mack-red);
+            padding: 2.5rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-brand {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-style: italic;
+            color: var(--cream);
+            text-decoration: none;
+        }
+
+        .footer-brand span { color: var(--mack-gold-light); font-style: normal; }
+
+        .footer-nav {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-nav a {
+            color: #5a4030;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: color 0.2s;
+        }
+
+        .footer-nav a:hover { color: var(--mack-red); }
+
+        /* ==================== FADE IN ==================== */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ==================== RESPONSIVE ==================== */
+        @media (max-width: 900px) {
+            .two-col { grid-template-columns: 1fr; gap: 3rem; }
+            .two-col.reverse { direction: ltr; }
+            .hero-content { padding: 3rem 2rem 4rem; }
+            .opener { padding: 4rem 2rem; }
+            .story-container { padding: 0 1.5rem; }
+            .stairs-moment { padding: 5rem 2rem; }
+            .dna-section { padding: 4rem 2rem; }
+            .mack-close { padding: 5rem 2rem; }
+            .mission-close { padding: 4rem 2rem; }
+            .page-footer { flex-direction: column; text-align: center; }
+        }
+
+        @media (max-width: 600px) {
+            .stat-cards { grid-template-columns: repeat(2, 1fr); }
+            .hero-stats { gap: 1.5rem; }
+            .dna-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+    <a href="index.html" class="nav-logo">Our <span>Fur</span> Life</a>
+    <a href="index.html#crew" class="nav-back">← Back to The Lineup</a>
+</nav>
+
+<!-- ==================== HERO ==================== -->
+<section class="hero">
+    <div class="hero-image-container">
+        <img src="images_webp/mack-hero.webp" alt="Mack — red bow tie, full confidence, zero apologies">
+    </div>
+
+    <div class="evidence-overlay">
+        <div class="cam-dot"></div>
+        <span class="evidence-tag">Casa Grant • Active Duty • All Day Every Day</span>
+    </div>
+
+    <div class="cam-timestamp">He arrived like he owned the place. He was right.</div>
+
+    <div class="hero-content">
+        <div class="case-file-label">
+            Case File — Mack
+        </div>
+        <h1 class="hero-title">
+            Born Ready.<br>Named After<br><em>A Legend.</em>
+        </h1>
+        <p class="hero-subtitle">
+            25% Maine Coon. 100% golden retriever energy.<br>
+            13 pounds of deliberate obstruction and shameless devotion.
+        </p>
+        <div class="hero-stats">
+            <div class="hero-stat">
+                <span class="stat-value">13 lbs</span>
+                <span class="stat-label">Of deliberate obstruction</span>
+            </div>
+            <div class="hero-stat">
+                <span class="stat-value">25%</span>
+                <span class="stat-label">Maine Coon. Explains everything.</span>
+            </div>
+            <div class="hero-stat">
+                <span class="stat-value">Bobtail</span>
+                <span class="stat-label">Wags like a dog. He knows.</span>
+            </div>
+            <div class="hero-stat">
+                <span class="stat-value" style="color:var(--mack-red-light);">🔴</span>
+                <span class="stat-label">Red bow tie. Non-negotiable.</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="scroll-hint">
+        <div class="scroll-arrow"></div>
+        Read His Story
+    </div>
+</section>
+
+<!-- ==================== OPENER ==================== -->
+<section class="opener">
+    <p class="opener-quote">
+        "He opened the mini fridge before I thought to childproof it. He wags his nub when he's happy. He plants 13 pounds directly in your path and demands love. Brad named him after his grandpa — the man who filled every room he walked into. One look at this boy and you understand exactly why."
+    </p>
+    <p class="opener-attr">— Merry, Our Fur Life</p>
+</section>
+
+<!-- ==================== BORN READY BANNER ==================== -->
+<div class="born-banner">
+    <span class="born-banner-text">Factory Configured</span>
+    <span class="born-divider">•</span>
+    <span class="born-banner-text">Confidence: Pre-Installed</span>
+    <span class="born-divider">•</span>
+    <span class="born-banner-text">Chaos: Ongoing</span>
+    <span class="born-divider">•</span>
+    <span class="born-banner-text" style="color:var(--mack-gold-light);">No Regrets</span>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ==================== CHAPTER 1: THE STREET ==================== -->
+<section class="story-section dark">
+    <div class="story-container">
+        <div class="two-col">
+            <div class="fade-in">
+                <div class="chapter light">
+                    <div class="chapter-line"></div>
+                    <span class="chapter-text">Chapter One</span>
+                </div>
+                <h2 class="story-heading light">He Walked Like<br>He Had Somewhere<br><em style="color:var(--mack-red-light);">Important To Be.</em></h2>
+                <div class="story-body on-dark">
+                    <p>That's the thing about this photo. That walk. Those ears already forward. That bobtail already held high. He had never been loved yet — not properly, not permanently — and he was still moving through the world like he was expected somewhere.</p>
+                    <p>We should have known then. That kind of confidence doesn't get installed. It comes factory-loaded. You either have it or you don't. <span class="hand light">Mack has it in abundance.</span></p>
+                    <p>He came in with his siblings — Diva, Astro, Cosmo — Nova's whole litter. A tiny striped chaos agent in a parking lot, nub already present, personality already fully formed, waiting for someone to catch up to him.</p>
+                    <p>He didn't need rehabilitating. He didn't need convincing. He just needed a house large enough to contain him. <span class="hand light">We weren't fully prepared.</span></p>
+                </div>
+                <div class="pullquote on-dark">
+                    <p>"He never had a before. He just had a beginning — and he hit the ground running."</p>
+                </div>
+            </div>
+            <div class="fade-in">
+                <div class="frame frame-main" style="border-color: rgba(192,41,46,0.25);">
+                    <img src="images_webp/mack-street.webp" alt="Baby Mack in the parking lot — bobtail, big ears, full confidence">
+                    <div class="frame-caption">The before. Bobtail already present. Walk already confident. Nobody warned us.</div>
+                </div>
+                <div class="frame frame-secondary" style="border-color: rgba(192,41,46,0.15);">
+                    <img src="images_webp/mack-day-one.webp" alt="Mack with his siblings Diva, Astro, and Cosmo — day one">
+                    <div class="frame-caption">Day One. The whole crew. Diva is already judging. Astro is already hungry. Mack is just... Mack.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== CHAPTER 2: NAMED AFTER A LEGEND ==================== -->
+<section class="story-section paper">
+    <div class="story-container">
+        <div class="two-col reverse">
+            <div class="fade-in">
+                <div class="chapter">
+                    <div class="chapter-line"></div>
+                    <span class="chapter-text">Chapter Two</span>
+                </div>
+                <h2 class="story-heading dark-text">Brad Named Him<br>After His<br><em style="color:var(--mack-red);">Grandpa.</em></h2>
+                <div class="story-body">
+                    <p>That's not a small thing. You don't give a cat a name like that casually. You do it because you look at this small, ridiculous, enormous-personality creature — and you see something familiar in him. Someone you loved.</p>
+                    <p>Brad's grandpa Mack was the extra-outgoing guy. The one who filled every room he walked into. The one who made people feel like the most important person there — not because he was performing it, but because that's just how he was built.</p>
+                    <p>Brad saw that in this cat on day one. <span class="hand">The name was decided before the second day.</span></p>
+                    <p>And if you've ever watched Mack enter a room — 13 pounds of Maine Coon bobtail strutting in like he received an engraved invitation — you understand immediately. The name was not a stretch. The name was a statement of fact.</p>
+                    <p>Grandpa Mack filled every room he walked into. <span class="hand">So does this one.</span></p>
+                </div>
+            </div>
+            <div class="fade-in">
+                <div class="frame frame-light frame-main">
+                    <img src="images_webp/mack-kitten.webp" alt="Mack as a young kitten — personality already fully formed">
+                    <div class="frame-caption" style="background:var(--ink);">Already filling the frame. Already himself. From the very beginning.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== CHAPTER 3: THE FRIDGE INCIDENT ==================== -->
+<section class="story-section dark">
+    <div class="story-container">
+        <div class="two-col">
+            <div class="fade-in">
+                <div class="chapter light">
+                    <div class="chapter-line"></div>
+                    <span class="chapter-text">Chapter Three</span>
+                </div>
+                <h2 class="story-heading light">I Never Thought<br>I'd Childproof<br><em style="color:var(--mack-red-light);">A House For A Cat.</em></h2>
+                <div class="story-body on-dark">
+                    <p>The mini fridge in the office was small. Unassuming. A Popeyes cup in the door, some drinks, the usual. Not something you think to secure. Not something you imagine requires a lock.</p>
+                    <p>Mack was the first creature outside of me to open it.</p>
+                    <p><span class="hand light">Let that sit for a moment.</span> The first creature. Not the second, not "one of the cats." The first. Before Brad. Before any reasonable adult human with opposable thumbs who might have a legitimate reason to open a fridge.</p>
+                    <p>Mack got there first. Mack always gets there first. That is his gift and our ongoing logistical challenge.</p>
+                    <p>The childproofing began that day. We now live in a house secured against a 13-pound tabby with problem-solving instincts, zero impulse control, and absolutely no concept of "that's not yours." He remains deeply unbothered by all of it.</p>
+                </div>
+            </div>
+            <div class="fade-in">
+                <!-- Evidence card -->
+                <div style="
+                    background: var(--mack-charcoal-light);
+                    border: 2px solid rgba(192,41,46,0.35);
+                    padding: 2.5rem;
+                    position: relative;
+                ">
+                    <div style="
+                        position: absolute;
+                        top: -1px;
+                        left: 1.5rem;
+                        transform: translateY(-50%);
+                        background: var(--mack-red);
+                        color: var(--cream);
+                        font-size: 0.65rem;
+                        font-weight: 800;
+                        letter-spacing: 0.18em;
+                        padding: 0.25rem 0.8rem;
+                        text-transform: uppercase;
+                    ">⚠ Incident Report — The Fridge</div>
+
+                    <div style="
+                        font-family: 'Caveat', cursive;
+                        font-size: 1.2rem;
+                        color: rgba(253,244,227,0.65);
+                        line-height: 1.8;
+                        font-weight: 600;
+                    ">
+                        <p style="margin-bottom: 1rem;"><strong style="color:var(--mack-red-light);">Location:</strong> Home office. Small mini fridge. Popeyes cup in the door.</p>
+                        <p style="margin-bottom: 1rem;"><strong style="color:var(--mack-red-light);">Suspect:</strong> Mack. 13 lbs. Bobtail. No remorse.</p>
+                        <p style="margin-bottom: 1rem;"><strong style="color:var(--mack-red-light);">Method:</strong> Unknown. Still under investigation.</p>
+                        <p style="margin-bottom: 1rem;"><strong style="color:var(--mack-red-light);">Outcome:</strong> Childproofing installed. Cat remains at large.</p>
+                        <p style="margin-bottom: 0;"><strong style="color:var(--mack-red-light);">Suspect's response:</strong> <em style="color:rgba(253,244,227,0.35);">None. He was already on the couch.</em></p>
+                    </div>
+
+                    <div style="
+                        margin-top: 2rem;
+                        padding-top: 1.5rem;
+                        border-top: 1px solid rgba(255,255,255,0.06);
+                        font-family: 'Caveat', cursive;
+                        font-size: 1rem;
+                        color: rgba(255,255,255,0.2);
+                        font-weight: 700;
+                        letter-spacing: 0.1em;
+                    ">This was not his last incident. This was his first documented one.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== CHAPTER 4: THE STRESS SENSOR ==================== -->
+<section class="story-section cream">
+    <div class="story-container">
+        <div class="two-col reverse">
+            <div class="fade-in">
+                <div class="chapter">
+                    <div class="chapter-line"></div>
+                    <span class="chapter-text">Chapter Four</span>
+                </div>
+                <h2 class="story-heading dark-text">He Knows<br>Before You<br><em style="color:var(--mack-red);">Say A Word.</em></h2>
+                <div class="story-body">
+                    <p>Here is the thing about Mack that nobody tells you when you adopt a cat with this much personality: underneath all of it — the fridge incidents, the 13-pound body blocks, the butt whack demands — is a creature who is genuinely, profoundly tuned into the people he loves.</p>
+                    <p>Get tearful. Just try it. Before you've said anything, before you've reached for a tissue — <span class="hand">Astro is on your lap.</span> And Mack is in your face. Literally. That large Maine Coon face, two inches from yours, doing absolutely nothing except being completely present.</p>
+                    <p>He doesn't meow at you. He doesn't do anything dramatic. He just shows up and refuses to leave until you're okay. That's the whole move. <span class="hand">He shows up.</span></p>
+                    <p>And when it's Mack who needs love? He finds you. He plants that 13-pound frame directly in your path, sits down like he has nowhere else to be, and waits. Butt whacks on demand. Nub wagging when you deliver. The transaction is simple and non-negotiable.</p>
+                    <p>He is the golden retriever of this household. <span class="hand">Science agrees.</span> Maine Coons are famous for dog-like loyalty. Mack did not read the breed description. He just lived it.</p>
+                </div>
+                <div class="pullquote">
+                    <p>"You can't fake being upset around Mack. He already knows. He was already on his way."</p>
+                </div>
+            </div>
+            <div class="fade-in">
+                <div class="frame frame-light frame-main">
+                    <img src="images_webp/mack-portrait.webp" alt="Mack — big boy portrait, full presence">
+                    <div class="frame-caption" style="background:var(--ink); color:var(--mack-red-light);">This is the face that shows up when you need it most. Zero warning. Zero agenda.</div>
+                </div>
+                <div class="frame frame-light frame-secondary">
+                    <img src="images_webp/mack-red.webp" alt="Mack in red collar — side-eye energy">
+                    <div class="frame-caption" style="background:var(--ink); color:var(--mack-red-light);">The side-eye that says: I see you, I'm coming, deal with it.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== THE MOMENT: WHERE'S MY BABIES ==================== -->
+<section class="stairs-moment">
+    <p class="stairs-call fade-in">
+        <em>"Where's My Babies?"</em>
+    </p>
+    <p class="stairs-response fade-in">
+        Yelled from the top of the stairs.<br>
+        One voice. Two words. Maximum volume.
+    </p>
+
+    <div class="stairs-photo fade-in">
+        <img src="images_webp/mack-bowtie.webp" alt="Mack in his bow tie — the boy who comes running">
+        <div class="stairs-photo-caption">The boy who comes running. Every single time.</div>
+    </div>
+
+    <div class="stairs-detail fade-in">
+        <p style="margin-bottom: 1.5rem;">Mack flies up the stairs like a herd of elephants. That's not poetic license — that's an accurate acoustic description of what 13 pounds of Maine Coon bobtail sounds like at full speed on hardwood stairs.</p>
+        <p style="margin-bottom: 1.5rem;">Brad's other cats — his cats, the ones he feeds and loves and talks to all day — do not move. They look up, perhaps. They consider. They go back to what they were doing.</p>
+        <p style="margin-bottom: 0; color: rgba(192,41,46,0.8); font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.3rem;">Mack comes running. Every time. Without fail. Like his name was called.<br>Like this is what he's been waiting for.<br><span style="color: var(--mack-red-light);">Like she's his person and everyone else should know it.</span></p>
+    </div>
+
+    <div style="margin-top: 3rem; padding: 1.5rem 2rem; background: rgba(192,41,46,0.08); border: 1px solid rgba(192,41,46,0.2); max-width: 600px; margin-left: auto; margin-right: auto; position: relative; z-index: 1;" class="fade-in">
+        <div style="font-family: 'Caveat', cursive; font-size: 1.15rem; color: rgba(253,244,227,0.45); font-weight: 700; line-height: 1.6;">
+            Brad is deeply unimpressed that his own cats will do this for Merry and not for him.<br>
+            <em style="color: rgba(192,41,46,0.6);">Brad has not said this out loud. His face says it for him.</em>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== CHAPTER 5: DIVA'S SHADOW ==================== -->
+<section class="story-section charcoal-mid">
+    <div class="story-container">
+        <div class="two-col">
+            <div class="fade-in">
+                <div class="chapter light">
+                    <div class="chapter-line"></div>
+                    <span class="chapter-text">Chapter Five</span>
+                </div>
+                <h2 class="story-heading light">He Follows<br>Diva Like<br><em style="color:var(--mack-red-light);">She's The Law.</em></h2>
+                <div class="story-body on-dark">
+                    <p>For all his confidence, all his himbo chaos energy, all his fridge-opening, stair-thundering, face-planting devotion — Mack has one person in this house whose authority he recognizes completely and without question.</p>
+                    <p>His sister. <span class="hand light">Diva.</span></p>
+                    <p>She leads. He follows. No discussion, no negotiation, no attempt to assert dominance. When Diva moves, Mack monitors. When Diva decides something, Mack defers. She is the CEO of Casa Grant and he has accepted this arrangement entirely.</p>
+                    <p>It is honestly the most endearing thing about him. This 13-pound, fridge-opening, Maine Coon golden retriever — fully capable of doing whatever he wants, whenever he wants — chooses to take his cues from a tabby who wears a rhinestone collar and hunts felt grasshoppers.</p>
+                    <p><span class="hand light">She has earned it.</span> And Mack, for all his chaos, knows quality when he sees it.</p>
+                </div>
+            </div>
+            <div class="fade-in">
+                <div class="frame frame-main" style="border-color: rgba(192,41,46,0.25);">
+                    <img src="images_webp/mack-eyes.webp" alt="Mack — extreme close-up, those eyes">
+                    <div class="frame-caption">The eyes that watch Diva's every move. Loyal. Attentive. Completely unbothered by his own devotion.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== DNA SECTION ==================== -->
+<section class="dna-section">
+    <div style="max-width: 1100px; margin: 0 auto; position: relative; z-index: 1;">
+        <div class="chapter light">
+            <div class="chapter-line"></div>
+            <span class="chapter-text">The Science — Basepaws DNA Report</span>
+        </div>
+        <h2 class="story-heading light" style="margin-bottom: 0.5rem;">The Report Just<br><em style="color:var(--mack-red-light);">Confirmed It.</em></h2>
+        <p style="color: rgba(253,244,227,0.4); margin-bottom: 0; font-size: 1rem; font-style: italic;">Everything you suspected about Mack is now scientifically documented.</p>
+
+        <div class="dna-grid fade-in">
+            <div class="dna-card">
+                <div class="dna-pct">25.66%</div>
+                <div class="dna-breed">Maine Coon</div>
+                <div class="dna-desc">Dog-loyal. Vocal. Playful. Water-curious. Explains the stair thunder and the face-planting entirely.</div>
+            </div>
+            <div class="dna-card">
+                <div class="dna-pct">35.5%</div>
+                <div class="dna-breed">Broadly Western</div>
+                <div class="dna-desc">A rich mix of northern breeds. Explorer blood. Confident blood. Fridge-opening blood.</div>
+            </div>
+            <div class="dna-card">
+                <div class="dna-pct">4.94%</div>
+                <div class="dna-breed">Norwegian Forest Cat</div>
+                <div class="dna-desc">The "mystic wildcat of fairy tales." 1,000 years old as a breed. Mack carries this energy daily.</div>
+            </div>
+            <div class="dna-card">
+                <div class="dna-pct">43</div>
+                <div class="dna-breed">Diseases: CLEAR</div>
+                <div class="dna-desc">Negative on all 43 tested disease markers. Genetically pristine. His chaos is a lifestyle choice, not a health condition.</div>
+            </div>
+            <div class="dna-card">
+                <div class="dna-pct">7.65%</div>
+                <div class="dna-breed">Domestic Polycat</div>
+                <div class="dna-desc">Generations of free-range cat genetics. The remarkable result of cats doing exactly what they wanted. Very on-brand.</div>
+            </div>
+            <div class="dna-card" style="border-color: rgba(192,41,46,0.5);">
+                <div class="dna-pct" style="color:var(--mack-gold-light);">Type A</div>
+                <div class="dna-breed">Blood Type</div>
+                <div class="dna-desc">The most common feline blood type. Even his blood is confident. Of course it is.</div>
+            </div>
+        </div>
+
+        <div class="dna-alert fade-in">
+            <div class="dna-alert-label">⚠ Oral Health Report — Filed Evidence</div>
+            <div class="dna-alert-text">
+                Basepaws detected <strong style="color:var(--mack-red-light);">dog DNA</strong> in Mack's oral microbiome sample.<br>
+                <em style="color:rgba(253,244,227,0.45);">Possible explanations include: sampling from Brad's meals, floor crumbs, or activities conducted without our knowledge.<br>
+                This is consistent with everything else we know about him. The investigation is ongoing. He remains at large.</em>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== MACK NOW ==================== -->
+<section class="story-section warm">
+    <div class="story-container">
+        <div style="max-width: 750px; margin: 0 auto; text-align: center;" class="fade-in">
+            <div class="chapter" style="justify-content: center;">
+                <div class="chapter-line"></div>
+                <span class="chapter-text">Mack Now</span>
+                <div class="chapter-line"></div>
+            </div>
+            <h2 class="story-heading dark-text" style="text-align: center; margin-bottom: 2rem;">13 Pounds.<br>Red Bow Tie.<br><em style="color:var(--mack-red);">Exactly As He Should Be.</em></h2>
+            <div class="story-body" style="max-width: 100%; text-align: left; margin: 0 auto;">
+                <p>Here is what Mack is now: a stunning, broad-shouldered tabby with a nub he wags like a golden retriever and a red bow tie that was never a question. He's the boy who opens fridges and thunders up stairs and plants himself in your path and shows up when you're crying without being asked.</p>
+                <p>He is the cat who follows Diva like she's the law and runs to Merry like she's the sun. He is the cat Brad named after his grandpa because the moment he walked in the door, you could see it — <span class="hand">the man who fills every room.</span></p>
+                <p>The DNA report confirmed what we already knew: Maine Coon heart, forest cat soul, golden retriever energy in a tabby body with a bobtail that wags. Genetically perfect. Behaviorally chaotic. <span class="hand">Completely irreplaceable.</span></p>
+                <p>Grandpa Mack filled every room he walked into. This Mack fills every room, every staircase, every lap, every moment you need someone to show up.<br><span class="hand">He was named right. He was always named right.</span></p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== WHERE'S MY BABIES CLOSE ==================== -->
+<section class="story-section paper">
+    <div class="story-container">
+        <div style="max-width: 800px; margin: 0 auto;" class="fade-in">
+            <div class="chapter" style="justify-content: center;">
+                <div class="chapter-line"></div>
+                <span class="chapter-text">The Moment That Defines Him</span>
+                <div class="chapter-line"></div>
+            </div>
+            <h2 class="story-heading dark-text" style="text-align: center; margin-bottom: 2rem;">He Always<br><em style="color:var(--mack-red);">Comes Running.</em></h2>
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 1.5rem;">
+                <div class="frame frame-light frame-main fade-in" style="max-width: 550px; width: 100%; transform: rotate(0deg);">
+                    <img src="images_webp/mack-hero.webp" alt="Mack in his red bow tie — the boy who comes running every time">
+                    <div class="frame-caption" style="background: var(--ink); color: var(--mack-red-light);">Every single time. Like she's his person and everyone else should already know it.</div>
+                </div>
+                <div class="story-body fade-in" style="max-width: 650px; text-align: center;">
+                    <p>Two words from the top of the stairs. <span class="hand">"Where's my babies?"</span> That's all it takes. And Mack — this ridiculous, enormous, fridge-opening, face-planting, bow-tie-wearing Maine Coon — comes flying up the stairs like a herd of elephants, nub wagging, every single time.</p>
+                    <p>Named after a man who filled every room. <span class="hand">Still doing it.</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== MAIN CLOSING ==================== -->
+<section class="mack-close">
+    <h2 class="fade-in">The Nub Wags.<br>The Stairs Thunder.<br><em>The Room Gets Fuller.</em></h2>
+    <p class="fade-in">Grandpa Mack filled every room he walked into. This Mack does it in 13 pounds, a bobtail, a red bow tie, and an absolutely unwavering conviction that he belongs exactly where he is — which is wherever you are. He was named right. From the very beginning, he was named right.</p>
+    <div class="mission-btns fade-in">
+        <a href="dallas-story.html" class="btn-cream" style="background:var(--mack-red);color:var(--cream);border-color:var(--mack-red);">Read Dallas's Story</a>
+        <a href="index.html#crew" class="btn-outline-cream">Meet The Full Crew</a>
+    </div>
+</section>
+
+<!-- ==================== MISSION CLOSE ==================== -->
+<section class="mission-close">
+    <h2>Named After A Legend.<br>Living Up To It Daily.</h2>
+    <p>Some cats come to you broken and need patience. Some cats come to you whole and need a house big enough to hold them. Mack was always whole. He just needed someone to call his name from the top of the stairs — and mean it. Brad and Merry gave him that. He gave them everything else.</p>
+    <div class="mission-btns">
+        <a href="index.html#rescue" class="btn-cream">See Our Featured Rescues</a>
+        <a href="index.html#crew" class="btn-outline-cream">Meet The Full Crew</a>
+    </div>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+<footer class="page-footer">
+    <a href="index.html" class="footer-brand">Our <span>Fur</span> Life</a>
+    <nav class="footer-nav">
+        <a href="index.html#crew">The Lineup</a>
+        <a href="index.html#cases">Case Files</a>
+        <a href="index.html#tips">Survival Guide</a>
+        <a href="index.html#merch">Merch</a>
+    </nav>
+    <span style="color: #3a2a1a; font-size: 0.8rem; font-weight: 600;">🐾 Real rescue. Real chaos. Real love.</span>
+</footer>
+
+<script>
+    const faders = document.querySelectorAll('.fade-in');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, i) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => {
+                    entry.target.classList.add('visible');
+                }, i * 80);
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.12 });
+
+    faders.forEach(el => observer.observe(el));
+
+    window.addEventListener('load', () => {
+        faders.forEach(el => {
+            const rect = el.getBoundingClientRect();
+            if (rect.top < window.innerHeight) {
+                el.classList.add('visible');
+            }
+        });
+    });
+</script>
+</body>
+</html>
